@@ -1,0 +1,240 @@
+/* header */
+.header {
+    background-color: #ffffff; /* Nền trắng */
+    border-bottom: 1px solid #eeeeee; /* Đường kẻ phân cách nhẹ */
+    padding: 10px 0; /* Khoảng đệm trên và dưới */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Bóng nhẹ */
+    position: sticky;
+    top:0;
+    z-index: 999;
+}
+.header .container .row {
+    justify-content: center;
+    align-items: center;
+}
+
+.inner-logo img {
+    /* Hình ảnh đã được đặt width=200px trong HTML, CSS này giúp điều chỉnh thêm */
+    display: block;
+}
+.inner-menu ul {
+    list-style: none; /* Bỏ dấu chấm đầu dòng */
+    margin: 0;
+    padding: 0;
+    display: flex; /* Kích hoạt Flexbox cho các mục menu */
+    gap: 30px; /* Khoảng cách giữa các mục menu */
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.inner-menu ul li a {
+    text-decoration: none; /* Bỏ gạch chân */
+    color: #333333; /* Màu chữ */
+    font-weight: 500; /* Độ đậm vừa phải */
+    font-size: 18px;
+    padding: 5px 0; /* Khoảng đệm để dễ nhấn hơn */
+    display: block; /* Để padding hoạt động tốt */
+    transition: color 0.3s ease; /* Hiệu ứng chuyển màu mượt mà */
+    
+}
+
+.inner-menu ul li a:hover {
+    color: #ff4d4f; /* Màu nổi bật khi rê chuột (ví dụ: màu đỏ) */
+}
+/* end header */
+ /* footer */
+.footer {
+    background-color: #333333;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    color:white;
+    padding:10px;
+}
+ /* end footer */
+/* section-one */
+.section-one {
+    padding: 40px 0; /* Khoảng đệm trên dưới */
+    background-color: #f8f8f8; /* Nền nhẹ nhàng */
+}
+.inner-head {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.inner-title {
+    font-size: 32px;
+    color: #333333;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.inner-box {
+    background-color: #ffffff;
+    border: 1px solid #eeeeee;
+    border-radius: 8px; /* Bo góc nhẹ */
+    overflow: hidden; /* Giữ mọi thứ bên trong */
+    height: 100%; /* Đảm bảo tất cả các thẻ có chiều cao bằng nhau */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+}
+.col-4 {
+    margin-bottom: 10px;
+}
+.inner-box:hover {
+    transform: translateY(-5px); /* Hiệu ứng nhấc lên khi rê chuột */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+.inner-image {
+    width: 100%;
+    /* Đảm bảo hình ảnh được căn giữa và có tỷ lệ khung hình tốt */
+    padding-top: 100%; /* Tỷ lệ 1:1 (vuông) */
+    position: relative;
+}
+.inner-discount {
+    position: absolute;
+    top:20px;
+    right:20px;
+    width:48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: yellow;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.inner-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Đảm bảo hình ảnh vừa vặn mà không bị cắt */
+    padding: 15px; /* Khoảng đệm nhẹ xung quanh ảnh */
+}
+
+/* --- 5. Nội dung Sản phẩm (Tên & Giá) --- */
+
+.inner-content {
+    padding: 15px 15px 20px;
+    
+}
+.inner-content .inner-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #444444;
+    margin-bottom: 10px;
+    /* Giới hạn tên sản phẩm trên 2 dòng */
+    
+    overflow: hidden;
+    height: 44px; /* Khoảng 2 dòng văn bản */
+}
+.inner-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.inner-price-new {
+    font-size: 20px;
+    font-weight: 700;
+    color: #ff4d4f; /* Màu sắc nổi bật cho giá mới (ví dụ: đỏ) */
+    margin: 0;
+}
+
+.inner-price-old {
+    font-size: 20px;
+    color: #999999;
+    margin: 0;
+}
+/* end section-one */
+/* chi tiet san pham */
+/* --- 1. Thiết lập Chung --- */
+
+.section-two {
+    padding: 40px 0;
+    background-color: #ffffff;
+}
+
+
+
+/* --- 2. Hình ảnh Sản phẩm (Cột 1) --- */
+
+.product-main-image-wrap {
+    border: 1px solid #eeeeee;
+    border-radius: 8px;
+    padding: 10px;
+    background-color: #fcfcfc;
+    text-align: center;
+}
+
+.product-main-image-wrap img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 6px;
+    width: 100%;
+}
+
+/* --- 3. Nội dung Sản phẩm (Cột 2) --- */
+
+.product-content-col {
+    padding: 0 15px;
+}
+
+.product-title {
+    font-size: 36px;
+    font-weight: 700;
+    color: #333333;
+    margin-bottom: 20px;
+}
+
+/* --- 4. Khu vực Giá (Nổi bật) --- */
+
+.product-price-section {
+    padding: 15px 20px;
+    background-color: #fff0f0; /* Nền màu hồng nhạt */
+    border-radius: 6px;
+    margin-bottom: 30px;
+}
+
+.price-new {
+    font-size: 38px;
+    font-weight: 800;
+    color: #ff4d4f; /* Màu đỏ nổi bật */
+    display: inline-block;
+    margin-right: 15px;
+}
+
+.price-old {
+    font-size: 18px;
+    color: #999999;
+    display: inline-block;
+    text-decoration: line-through;
+}
+
+.discount-percent {
+    font-size: 14px;
+    color: #ff4d4f;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+/* --- 5. Thông tin chi tiết (Info Lines) --- */
+
+.product-info-section {
+    margin-bottom: 40px;
+    padding-bottom: 20px;
+}
+
+.detail-line {
+    font-size: 16px;
+    color: #555555;
+    margin-bottom: 10px;
+}
+
+.detail-line b {
+    color: #333333;
+    font-weight: 600;
+    margin-left: 5px;
+}
+/* end chi tiet san pham */

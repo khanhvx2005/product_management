@@ -1,0 +1,35 @@
+extends ../../layouts/default.pug
+block main
+    div(class="section-two product-detail-client")
+    div(class="container")
+        div(class="row") 
+            // Cột 1: Hình ảnh (col-5)
+            div(class="col-5") 
+                if(products.thumbnail)
+                    div(class="product-main-image-wrap")
+                        img(src=products.thumbnail alt="Ảnh sản phẩm")
+            
+            // Cột 2: Nội dung & Giá (col-7)
+            div(class="col-7")
+                if(products.title)
+                    h1(class="product-title") #{products.title}
+
+                // Khu vực Giá
+                div(class="product-price-section")
+                    if(products.discountPercentage)
+                        div(class="discount-percent") Giảm: #{products.discountPercentage}%
+                    if(products.price)
+                        div(class="price-new") #{(products.price *(100 - products.discountPercentage)/100)}$
+                        // Giả định có giá cũ
+                        div(class="price-old") #{products.price}$
+
+                // Khu vực Mô tả & Thông tin
+                div(class="product-info-section")
+                    if(products.description)
+                        div(class="detail-line description-wrap") Mô tả: <b>#{products.description}</b>
+                    if(products.stock)
+                        div(class="detail-line") Còn lại: <b>#{products.stock} sản phẩm</b>
+                    if(products.position)
+                        div(class="detail-line") Vị trí: <b>#{products.position}</b>
+                    
+                

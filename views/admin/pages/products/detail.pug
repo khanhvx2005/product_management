@@ -1,0 +1,56 @@
+extends ../../layouts/default.pug
+block main 
+    
+    div(class="product-detail-card")
+        h2(class="detail-header") Chi tiết sản phẩm: 
+
+        if(products.title)
+            h2(class="product-title") #{products.title}
+
+    //- // --- Bọc tất cả các thuộc tính trong một container để dễ dàng chia cột ---
+    div(class="product-attributes")
+        //- // Bắt đầu cột 1 (Giá, Giảm giá, Tồn kho)
+        div(class="attribute-group")
+            if(products.price)
+                div(class="attribute-line") 
+                    span.label Giá: 
+                    b.value #{products.price}$
+            if(products.discountPercentage)
+                div(class="attribute-line") 
+                    span.label Giảm giá: 
+                    b.value #{products.discountPercentage}%
+            if(products.stock)
+                div(class="attribute-line") 
+                    span.label Còn lại: 
+                    b.value #{products.stock}
+            if(products.position)
+                div(class="attribute-line") 
+                    span.label Vị trí: 
+                    b.value #{products.position}
+            
+        div(class="attribute-group")
+            if(products.status)
+                div(class="attribute-line") 
+                    span.label Trạng thái:
+                    if(products.status === "active")
+                        button(type = "button " class="btn btn-success btn-sm") Hoạt động
+                    else
+                        button(type = "button " class="btn btn-danger btn-sm") Dừng hoạt động 
+
+            if(products.thumbnail)
+                div(class="attribute-line thumbnail-line")
+                    span.label Hình ảnh:
+                    img(
+                        src = products.thumbnail
+                        alt = "Sản phẩm"
+                    )
+            
+            if(products.description)
+                div(class="attribute-line description-line")
+                    span.label Mô tả: 
+                    <b class = "value"> !{products.description} </b>
+
+    a(class="btn btn-warning" type = "button" href = `/admin/products/edit/${products.id}`) Chỉnh sửa
+
+    
+        

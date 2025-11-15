@@ -1,0 +1,52 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+block main 
+    +alert_success("5000")
+    div(class="edit-product-form")
+        h2 Chỉnh Sửa Sản Phẩm 
+        form(action=`/admin/products/edit/${products.id}?_method=PATCH` 
+        method="POST" 
+        enctype="multipart/form-data"
+        ) 
+            div(class="form-group")
+                label(for = "title") Tiêu đề
+                input(type = "text" class = "form-control" id = "title" name = "title" value = products.title) 
+            div(class="form-group")
+                label(for = "description") Mô tả
+                textarea(class = "form-control" id = "description" name = "description" rows = "3" ) #{products.description}
+            div(class="row") 
+                div(class="col-md-6")
+                    div(class="form-group")
+                        label(for = "price") Giá
+                        input(type = "number" class = "form-control" id = "price" name = "price" min = "0" value = products.price )
+                div(class="col-md-6")
+                    div(class="form-group")
+                        label(for = "discountPercentage") Giảm giá (%)
+                        input(type = "number" class = "form-control" id = "discountPercentage" name = "discountPercentage" min = "0" max = "100" value = products.discountPercentage)
+            div(class="row") 
+                div(class="col-md-6")
+                    div(class="form-group")
+                        label(for = "stock") Số lượng
+                        input(type = "number" class = "form-control" id = "stock" name = "stock" min = "0" value = products.stock )
+                div(class="col-md-6")
+                    div(class="form-group")
+                        label(for = "position") Vị trí
+                        input(type = "number" class = "form-control" id = "position" name = "position" min = "0" placeholder = "Tự động tăng" value = products.position)
+            
+            div(class="form-group" upload-image)
+                label(for = "thumbnail") Ảnh
+                button(type = "button" class = "btn btn-success") X
+                input(type = "file" class = "form-control-file" id = "thumbnail" name = "thumbnail" accept = "image/*" upload-image-input)
+                img(src = products.thumbnail alt = "" upload-image-priview ) 
+
+            div(class="form-group")
+                label Trạng thái
+                div
+                    div(class=" form-check form-check-inline") 
+                        input(type = "radio" class = "form-check-input" id = "active" name = "status" value = "active" checked= (products.status === "active" ? true : false)) 
+                        label(for = "active" class = "form-check-label" ) Hoạt động
+                    div(class="form-check form-check-inline")
+                        input(type = "radio" class = "form-check-input" id = "inactive" name = "status" value = "inactive" checked= (products.status === "inactive" ? true : false))
+                        label(for = "inactive" class = "form-check-label" ) Dừng hoạt động
+
+            button(type = "submit" class = "btn btn-primary") Cập nhập
