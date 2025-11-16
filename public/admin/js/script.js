@@ -195,7 +195,7 @@ if (formStorage) {
         buttonStorageDelete.forEach((button) => {
             button.addEventListener("click", () => {
                 const isConfirm = confirm("Bạn có chắc chắn muốn xóa không ?");
-                if(!isConfirm) {
+                if (!isConfirm) {
                     return;
                 }
                 const id = button.getAttribute("data-id");
@@ -227,25 +227,54 @@ if (showAlert) {
 // end thong bao
 // upload ảnh
 const uploadImage = document.querySelector("[upload-image]");
-if(uploadImage) {
+if (uploadImage) {
     const uploadImageInput = uploadImage.querySelector("input[upload-image-input]");
     const uploadImagePreview = uploadImage.querySelector("img[upload-image-priview]");
     const buttonClose = uploadImage.querySelector("button");
-    
-    uploadImageInput.addEventListener("change" , (e)=> {
+
+    uploadImageInput.addEventListener("change", (e) => {
         const file = e.target.files[0];
-        if(file) {
+        if (file) {
             uploadImagePreview.src = URL.createObjectURL(file);
             buttonClose.classList.add("show");
         }
     })
-    buttonClose.addEventListener("click" , ()=> {
+    buttonClose.addEventListener("click", () => {
         uploadImagePreview.src = "";
         uploadImageInput.value = "";
         buttonClose.classList.remove("show");
     })
 }
 // end upload ảnh
-// edit product
+// thay doi theo nhieu tieu chi
+const sort = document.querySelector("div[sort]");
+if (sort) {
+    const url = new URL(window.location.href);
+    const sortSelect = sort.querySelector("[sort-select]");
+    const sortClear = sort.querySelector("[sort-clear]");
+    sortSelect.addEventListener("change", (e) => {
+        const value = sortSelect.value;
+        const sortKey = value.split("-")[0];
+        const sortValue = value.split("-")[1];
+        url.searchParams.set("sortKey", sortKey);
+        url.searchParams.set("sortValue", sortValue);
+        window.location.href = url.href;
+    })
+    sortClear.addEventListener("click", () => {
+        url.searchParams.delete("sortKey");
+        url.searchParams.delete("sortValue");
+        window.location.href = url.href;
+    })
+    const sortKey = url.searchParams.get("sortKey");
+    const sortValue = url.searchParams.get("sortValue");
+    if (sortKey && sortValue) {
 
-// end edit product
+        const stringClass = `${sortKey}-${sortValue}`;
+        const optionSelected = sortSelect.querySelector(`option[value='${stringClass}']`)
+        optionSelected.selected = true;
+    }
+
+
+
+}
+// end thay doi theo nhieu tieu chi

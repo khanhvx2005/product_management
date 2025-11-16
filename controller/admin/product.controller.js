@@ -46,8 +46,17 @@ module.exports.index = async (req, res) => {
     }
     panination.skip = parseInt((panination.currentPage - 1) * panination.limitItem);
     panination.totalPage = Math.ceil(count / panination.limitItem);
+    // sort
+    const sort = {
+    };
+    if(req.query.sortKey && req.query.sortValue) {
+        sort[req.query.sortKey] = req.query.sortValue;
+    }else{
+        sort.position = "desc";
+    }
+    // end sort
     // console.log(panination);
-    const products = (await Product.find(find).sort({ position: "desc" }).limit(panination.limitItem).skip(panination.skip))
+    const products = (await Product.find(find).sort(sort).limit(panination.limitItem).skip(panination.skip))
 
     res.render('admin/pages/products/index', { title: "Trang sản phẩm", products: products, filter: filter, keyword: keyword, panination: panination })
 }
