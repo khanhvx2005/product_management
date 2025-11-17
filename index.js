@@ -23,7 +23,7 @@ app.use(express.static(`${__dirname}/public`))
 // end static file in
 // body-parser
 app.use(methodOverride('_method'))
-
+app.locals.prifixAmin = '/admin';
 // end body-parser
 
 //flash

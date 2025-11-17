@@ -136,7 +136,7 @@ tbody td {
 /* --- 3. Hình ảnh Sản phẩm --- */
 
 tbody td img {
-    max-width: 150px;
+    max-width: 100px;
     /* Kích thước tối đa của ảnh */
     height: auto;
     border-radius: 4px;
