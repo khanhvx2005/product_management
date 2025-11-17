@@ -2,7 +2,6 @@ const flash = require('express-flash')
 const express = require('express')
 const cookieParser = require('cookie-parser')
 const expressSession = require('express-session')
-
 const bodyParser = require('body-parser')
 require('dotenv').config()
 const methodOverride = require('method-override')
@@ -26,6 +25,7 @@ app.use(express.static(`${__dirname}/public`))
 app.use(methodOverride('_method'))
 
 // end body-parser
+
 //flash
 app.use(cookieParser('ABCSDSADAS'));
 app.use(expressSession({ cookie: { maxAge: 60000 } }));

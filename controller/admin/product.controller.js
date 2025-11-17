@@ -166,14 +166,7 @@ module.exports.create = async (req, res) => {
 }
 // [PATCH] /admin/products/create
 
-module.exports.createPost = async (req, res) => {
-    // if(!req.body.title) {
-    //     req.flash("error" , "Vui lòng nhập tiêu đề !")
-    //     const backURL = req.get("Referer") || "/admin/products";
-    //     res.redirect(backURL);
-    //     return;
-    // }
-    // console.log(req.file, req.body);
+module.exports.createPost = async (req, res) => {  
     req.body.price = parseInt(req.body.price);
     req.body.discountPercentage = parseInt(req.body.discountPercentage);
     req.body.stock = parseInt(req.body.stock);

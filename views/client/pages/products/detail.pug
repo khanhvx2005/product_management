@@ -26,7 +26,7 @@ block main
                 // Khu vực Mô tả & Thông tin
                 div(class="product-info-section")
                     if(products.description)
-                        div(class="detail-line description-wrap") Mô tả: <b>#{products.description}</b>
+                        div(class="detail-line description-wrap") Mô tả: <b>!{products.description}</b>
                     if(products.stock)
                         div(class="detail-line") Còn lại: <b>#{products.stock} sản phẩm</b>
                     if(products.position)
