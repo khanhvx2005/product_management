@@ -1,15 +1,30 @@
 const productCategory = require('../../model/productCategory.model')
-module.exports.index =async (req, res) => {
+// [GET] /admin/product-category
+const createTreeHelper = require('../../helpers/createTree')
+module.exports.index = async (req, res) => {
     const find = {
         deleted: false
     }
-    const products = await productCategory.find(find)
 
-    res.render('admin/pages/productCategory/index', { title: "Trang danh mục sản phẩm" , products:products})
+    const records = await productCategory.find(find)
+    const newRecords = createTreeHelper.tree(records);
+
+    res.render('admin/pages/productCategory/index', { title: "Trang danh mục sản phẩm", records: newRecords })
 }
-module.exports.create = (req, res) => {
-    res.render('admin/pages/productCategory/create', { title: "Tạo danh mục sản phẩm" })
+// [GET] /admin/product-category/create
+
+module.exports.create = async (req, res) => {
+    const find = {
+        deleted: false
+    }
+    // Hàm xây dụng danh sách câu trúc
+
+    const records = await productCategory.find(find)
+    const newRecords = createTreeHelper.tree(records);
+
+    res.render('admin/pages/productCategory/create', { title: "Tạo danh mục sản phẩm", records: newRecords })
 }
+// [PATCH] /admin/product-category/create
 module.exports.createPost = async (req, res) => {
 
     if (req.body.position == "") {
