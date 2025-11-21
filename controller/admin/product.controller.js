@@ -194,8 +194,14 @@ module.exports.edit = async (req, res) => {
 
     const id = req.params.id;
     const products = await Product.findOne({ _id: id })
+    const find = {
+        deleted: false
+    }
+    // Hàm xây dụng danh sách câu trúc
 
-    res.render('admin/pages/products/edit', { title: "Trang chỉnh sửa sản phẩm", products: products })
+    const category = await productCategory.find(find)
+    const newRecords = createTreeHelper.tree(category);
+    res.render('admin/pages/products/edit', { title: "Trang chỉnh sửa sản phẩm", products: products, category: newRecords })
 }
 // [PATCH] /admin/products/edit/:id
 module.exports.editPatch = async (req, res) => {
