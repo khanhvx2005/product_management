@@ -1,6 +1,9 @@
 // [GET] /admin/products
 const Product = require('../../model/product.model')
 const validate = require('../../validates/product.validate')
+const productCategory = require('../../model/productCategory.model')
+// [GET] /admin/product-category
+const createTreeHelper = require('../../helpers/createTree')
 module.exports.index = async (req, res) => {
     const find = {
         deleted: false
@@ -49,9 +52,9 @@ module.exports.index = async (req, res) => {
     // sort
     const sort = {
     };
-    if(req.query.sortKey && req.query.sortValue) {
+    if (req.query.sortKey && req.query.sortValue) {
         sort[req.query.sortKey] = req.query.sortValue;
-    }else{
+    } else {
         sort.position = "desc";
     }
     // end sort
@@ -161,12 +164,18 @@ module.exports.storagePatch = async (req, res) => {
 }
 // [GET] /admin/products/create
 module.exports.create = async (req, res) => {
+    const find = {
+        deleted: false
+    }
+    // Hàm xây dụng danh sách câu trúc
 
-    res.render('admin/pages/products/create', { title: "Trang thêm mới sản phẩm" })
+    const category = await productCategory.find(find)
+    const newRecords = createTreeHelper.tree(category);
+    res.render('admin/pages/products/create', { title: "Trang thêm mới sản phẩm", category: newRecords })
 }
 // [PATCH] /admin/products/create
 
-module.exports.createPost = async (req, res) => {  
+module.exports.createPost = async (req, res) => {
     req.body.price = parseInt(req.body.price);
     req.body.discountPercentage = parseInt(req.body.discountPercentage);
     req.body.stock = parseInt(req.body.stock);
@@ -176,7 +185,7 @@ module.exports.createPost = async (req, res) => {
     } else {
         req.body.position = parseInt(req.body.position);
     }
-    
+
     await Product.create(req.body);
     res.redirect("/admin/products");
 }
@@ -198,13 +207,13 @@ module.exports.editPatch = async (req, res) => {
         req.body.thumbnail = `/uploads/${req.file.filename}`;
     }
     await Product.updateOne({ _id: req.params.id }, req.body)
-    req.flash("success" , "Chỉnh sửa thành công !");
+    req.flash("success", "Chỉnh sửa thành công !");
     res.redirect("/admin/products")
 }
-module.exports.detail = async(req,res)=> {
+module.exports.detail = async (req, res) => {
     const id = req.params.id;
-    const products = await Product.findOne({_id:id});
+    const products = await Product.findOne({ _id: id });
     // console.log(products);
-    res.render('admin/pages/products/detail' , {title:"Trang chi tiết sản phẩm" , products:products})
+    res.render('admin/pages/products/detail', { title: "Trang chi tiết sản phẩm", products: products })
 }
 
