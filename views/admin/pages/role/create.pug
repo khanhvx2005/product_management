@@ -1,0 +1,12 @@
+extends ../../layouts/default.pug
+block main 
+    h2 Tạo mới nhóm quyền
+    form(action = "/admin/roles/create" method = "POST")
+        div(class = "form-group")
+            label(for = "title") Tiêu đề
+            input(class = "form-control" type = "text" name = "title" id = "title")
+        div(class = "form-group")   Mô tả
+            label(for = "description")
+            textarea(class = "form-control" type = "text" name = "description" id = "description" rows = "5")
+        div(class="form-group")
+            button(class= "btn btn-outline-success" type = "submit") Tạo mới
