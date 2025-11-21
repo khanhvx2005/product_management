@@ -1,0 +1,48 @@
+extends ../../layouts/default.pug
+include ../../mixins/select-tree.pug
+block main
+    div(class="edit-product-form")
+        h2 Chỉnh Sửa Danh Mục
+        form(action=`${prifixAmin}/products-category/edit/${data.id}?_method=PATCH` 
+        method="POST" 
+        
+        enctype="multipart/form-data"
+        ) 
+            div(class="form-group")
+                label(for = "title") Tiêu đề
+                input(type = "text" class = "form-control" id = "title" name = "title" value = data.title) 
+                
+            
+            div(class="row")
+                div(class="col-6")
+                    div(class="form-group")
+                        label(for = "parent_id") Danh mục cha
+                        select( class = "form-control" id = "parent_id" name = "parent_id" ) 
+                            option(disabled selected) -- Chọn danh mục cha --
+                            if(records)
+                                +select-tree(records , 1 , data.parent_id)
+
+                div(class="col-6")
+                    div(class="form-group")
+                        label(for = "position") Vị trí
+                        input(type = "number" class = "form-control" id = "position" name = "position" min = "0" placeholder = "Tự động tăng" value = data.position)
+            div(class="form-group")
+                label(for = "description") Mô tả
+                textarea(class = "form-control" id = "description" name = "description" rows = "5") #{data.description}
+            div(class="form-group" upload-image)
+                label(for = "thumbnail") Ảnh
+                button(type = "button" class = "btn btn-success") X
+                input(type = "file" class = "form-control-file" id = "thumbnail" name = "thumbnail" accept = "image/*" upload-image-input)
+                img(src = data.thumbnail alt = data.title upload-image-priview ) 
+
+            div(class="form-group")
+                label Trạng thái
+                div
+                    div(class=" form-check form-check-inline") 
+                        input(type = "radio" class = "form-check-input" id = "active" name = "status" value = "active" checked = (data.status == "active" ? true : false)) 
+                        label(for = "active" class = "form-check-label") Hoạt động
+                    div(class="form-check form-check-inline")
+                        input(type = "radio" class = "form-check-input" id = "inactive" name = "status" value = "inactive" checked = (data.status == "inactive" ? true : false))
+                        label(for = "inactive" class = "form-check-label") Dừng hoạt động
+
+            button(type = "submit" class = "btn btn-primary") Chỉnh Sửa Danh Mục

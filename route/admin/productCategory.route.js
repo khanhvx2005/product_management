@@ -5,11 +5,15 @@ const router = express.Router()
 const controller = require('../../controller/admin/productCategory.controller')
 const validate = require('../../validates/product.validate')
 const uploadCloud = require('../../middlewares/uploadCloud.middleware')
-router.get('/' ,controller.index)
-router.get('/create' ,controller.create)
-router.post('/create' , 
+router.get('/', controller.index)
+router.get('/create', controller.create)
+router.post('/create',
     upload.single('thumbnail'),
-        uploadCloud.upload,
-        validate.create,
+    uploadCloud.upload,
+    validate.create,
     controller.createPost)
+router.get('/edit/:id', controller.edit)
+router.patch('/edit/:id', upload.single('thumbnail'),
+    uploadCloud.upload,
+    validate.create, controller.editPatch)
 module.exports = router;

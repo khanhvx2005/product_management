@@ -18,7 +18,7 @@ mixin table-tree(records , level = 1)
                 else 
                     a(class = "badge badge-danger" href = "javascript:;" data-id = item.id data-status = item.status button-status) Dừng hoạt động
             td
-                a( class="btn btn-success ml-1 btn-sm" href = `/admin/products/edit/${item.id}`) Sửa
+                a( class="btn btn-success ml-1 btn-sm" href = `/admin/products-category/edit/${item.id}`) Sửa
                 button(type="button" class="btn btn-danger ml-1 btn-sm" button-delete-item data-id = item.id) Xóa
                 a( class="btn btn-primary ml-1 btn-sm" href = `/admin/products/detail/${item.id}`) Chi tiết
         if item.children && item.children.length > 0

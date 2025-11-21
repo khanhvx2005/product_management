@@ -37,3 +37,23 @@ module.exports.createPost = async (req, res) => {
     await productCategory.create(req.body);
     res.redirect("/admin/products-category");
 }
+// [GET] /admin/products-category/edit/:id
+module.exports.edit = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const data = await productCategory.findOne({
+            _id: id,
+            deleted: false
+        })
+        const records = await productCategory.find({ deleted: false })
+        const newRecords = createTreeHelper.tree(records);
+        res.render('admin/pages/productCategory/edit', { title: "Trang chỉnh sửa danh mục", data: data, records: newRecords })
+    } catch (error) {
+        res.redirect("/admin/products-category")
+    }
+}
+module.exports.editPatch = async (req, res) => {
+    const id = req.params.id;
+    await productCategory.updateOne({ _id: id }, req.body)
+    res.redirect("/admin/products-category")
+}
