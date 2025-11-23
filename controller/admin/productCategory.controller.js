@@ -145,3 +145,17 @@ module.exports.changeMulti = async (req, res) => {
             break;
     }
 }
+module.exports.deleteItem = async (req, res) => {
+    const id = req.params.id;
+    await productCategory.updateOne({ _id: id }, { deleted: true })
+    req.flash('success', 'Xóa sản phẩm thành công !');
+    const backURL = req.get("Referer") || "/admin/products";
+    res.redirect(backURL);
+
+}
+module.exports.detail = async (req, res) => {
+    const id = req.params.id;
+    const products = await productCategory.findOne({ _id: id });
+    // console.log(products);
+    res.render('admin/pages/productCategory/detail', { title: "Trang chi tiết sản phẩm", products: products })
+}

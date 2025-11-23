@@ -1,0 +1,41 @@
+extends ../../layouts/default.pug
+block main 
+    
+    h2(class="detail-header") Chi tiết danh mục
+
+    if(products.title)
+        h2 Tiêu đề: #{products.title}
+
+
+    
+    if(products.position)
+        
+        div(class = "mb-3") Vị trí: #{products.position}
+        
+        
+    
+    if(products.status)
+        div(class = "mb-3")
+            span.label Trạng thái:
+            if(products.status === "active")
+                button(type = "button " class="btn btn-success btn-sm ") Hoạt động
+            else
+                button(type = "button " class="btn btn-danger btn-sm ") Dừng hoạt động 
+
+    if(products.thumbnail)
+        div(class = "mb-3")
+            span.label Hình ảnh:
+            img(
+                src = products.thumbnail
+                alt = "Sản phẩm"
+                style = "width:150px;height:auto"
+            )
+        
+    if(products.description)
+        div(class="mb-3")
+            span.label.d-flex Mô tả: !{products.description} 
+    
+    a(class="btn btn-warning" type = "button" href = `/admin/products-category/edit/${products.id}`) Chỉnh sửa
+
+    
+        

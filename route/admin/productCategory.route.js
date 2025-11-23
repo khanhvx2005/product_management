@@ -18,6 +18,7 @@ router.patch('/edit/:id', upload.single('thumbnail'),
     validate.create, controller.editPatch)
 router.patch('/change-status/:id/:status', controller.changeStatus)
 router.patch('/change-multi', controller.changeMulti)
-
+router.delete('/delete/:id', controller.deleteItem)
+router.get('/detail/:id', controller.detail)
 
 module.exports = router;
