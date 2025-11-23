@@ -94,3 +94,12 @@ module.exports.editPatch = async (req, res) => {
     await productCategory.updateOne({ _id: id }, req.body)
     res.redirect("/admin/products-category")
 }
+module.exports.changeStatus = async (req, res) => {
+    const id = req.params.id;
+    const status = req.params.status;
+    await productCategory.updateOne({ _id: id }, { status: status })
+    req.flash('success', 'Cập nhập sản phẩm thành công !');
+
+    const backURL = req.get('Referer') || '/admin/products';
+    res.redirect(backURL);
+}

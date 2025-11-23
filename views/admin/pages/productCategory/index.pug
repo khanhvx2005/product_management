@@ -1,7 +1,9 @@
 extends ../../layouts/default.pug
 include ../../mixins/table-tree.pug
 include ../../mixins/filter-search.pug
+include ../../mixins/alert.pug
 block main 
+    +alert_success("5000")
     h2 Trang danh mục sản phẩm
     +filter-search(filter)
     //- div #{records}
@@ -26,6 +28,10 @@ block main
         tbody
             
             +table-tree(records)
+    form(action=""
+        method = "POST"
+        path ="/admin/products-category/change-status"
+        form-change-status )
             
 
             
