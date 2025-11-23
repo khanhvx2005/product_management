@@ -103,3 +103,45 @@ module.exports.changeStatus = async (req, res) => {
     const backURL = req.get('Referer') || '/admin/products';
     res.redirect(backURL);
 }
+module.exports.changeMulti = async (req, res) => {
+    const type = req.body.type;
+    const ids = req.body.ids.split(",");
+
+    const backURL = req.get('Referer') || "/admin/products";
+    switch (type) {
+        case "active":
+            await productCategory.updateMany({ _id: { $in: ids } }, { status: type })
+            req.flash('success', 'Cập nhập trạng thái nhiều sản phẩm thành công !');
+            res.redirect(backURL);
+            break;
+        case "inactive":
+            await productCategory.updateMany({ _id: { $in: ids } }, { status: type })
+            req.flash('success', 'Cập nhập trạng thái sản phẩm thành công !');
+            res.redirect(backURL);
+            break;
+        case "delete-all":
+            await productCategory.updateMany({ _id: { $in: ids } }, { deleted: true })
+            req.flash('success', 'Xóa sản phẩm thành công !');
+
+            res.redirect(backURL);
+
+            break;
+        case "change-position":
+
+            for (element of ids) {
+                let [id, position] = element.split("-");
+                position = parseInt(position);
+                await productCategory.updateOne({ _id: id }, { position: position })
+
+            }
+
+
+            req.flash('success', 'Thay đổi vị trí thành công !');
+
+            res.redirect(backURL);
+
+            break;
+        default:
+            break;
+    }
+}

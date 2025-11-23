@@ -17,5 +17,7 @@ router.patch('/edit/:id', upload.single('thumbnail'),
     uploadCloud.upload,
     validate.create, controller.editPatch)
 router.patch('/change-status/:id/:status', controller.changeStatus)
+router.patch('/change-multi', controller.changeMulti)
+
 
 module.exports = router;
