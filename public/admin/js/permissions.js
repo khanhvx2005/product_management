@@ -41,7 +41,7 @@ if (records) {
     dataRecords.forEach((item, index) => {
         const permissions = (item.permissions);
         permissions.forEach((element) => {
-            console.log(element);
+
             const rows = tablePermissions.querySelector(`[data-name='${element}']`);  // lấy ra các hàng trong bảng
 
 

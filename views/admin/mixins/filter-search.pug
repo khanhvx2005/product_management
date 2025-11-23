@@ -1,0 +1,14 @@
+mixin filter-search(filter)
+    div(class="card mb-3")
+        div(class="card-header") Bộ lọc và tìm kiếm
+        div(class="card-body")
+            div(class="row")
+                div(class="col-6")
+                    each item ,index in filter
+                        button(class=`btn btn-outline-success ml-1 btn-sm ${item.class}` type="button" status = item.status) #{item.name}
+                div(class="col-6")
+                    form(id = "form-search")
+                        div(class = "input-group")
+                            input(type = "text" name = "keyword" placeholder = "Nhập từ khóa" class = "form-control " value = keyword)
+                            div(class = "input-group-append")
+                                button(class= "btn btn-primary" type = "submit") Áp dụng

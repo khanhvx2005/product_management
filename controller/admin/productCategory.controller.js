@@ -5,11 +5,48 @@ module.exports.index = async (req, res) => {
     const find = {
         deleted: false
     }
+    const filter = [
+        {
+            name: "Tất cả",
+            status: "",
+            class: ""
+        },
+        {
+            name: "Hoạt động",
+            status: "active",
+            class: ""
+        },
+        {
+            name: "Dừng hoạt động",
+            status: "inactive",
+            class: ""
+        }
+    ]
+    if (req.query.status) {
+        find.status = req.query.status;
+        const index = filter.findIndex((item) => (item.status == req.query.status));
+        filter[index].class = "active";
+    } else {
+        const index = filter.findIndex((item) => (item.status == ""));
+        filter[index].class = "active";
+    }
+    let keyword = "";
+    if (req.query.keyword) {
+        keyword = req.query.keyword;
+        const reg = new RegExp(req.query.keyword, "i");
+        find.title = reg;
+    }
 
     const records = await productCategory.find(find)
-    const newRecords = createTreeHelper.tree(records);
+    if (req.query.status) {
+        res.render('admin/pages/productCategory/index', { title: "Trang danh mục sản phẩm", filter: filter, records: records, keyword: keyword })
 
-    res.render('admin/pages/productCategory/index', { title: "Trang danh mục sản phẩm", records: newRecords })
+    } else {
+        const newRecords = createTreeHelper.tree(records);
+        res.render('admin/pages/productCategory/index', { title: "Trang danh mục sản phẩm", records: newRecords, filter: filter, keyword: keyword })
+    }
+
+
 }
 // [GET] /admin/product-category/create
 

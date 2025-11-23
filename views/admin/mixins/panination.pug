@@ -1,0 +1,14 @@
+mixin panination(panination)
+    nav(aria-label="Page navigation example")
+        ul(class="pagination justify-content-end")
+            if(panination.currentPage > 1)
+                li(class="page-item ")
+                    a(class="page-link" href="#" aria-label="Previous" page = panination.currentPage - 1)
+                        span(aria-hidden="true") &laquo;
+            - for(let i = 1;i<=panination.totalPage;i++)
+                li(class=`page-item ${panination.currentPage == i ? "active" : ""}`)
+                    a(class="page-link" href="#" page = i button-page) #{i}
+            if(panination.currentPage < panination.totalPage)
+                li(class="page-item")
+                    a(class="page-link" href="#" aria-label="Next" page = panination.currentPage + 1) 
+                        span(aria-hidden="true") &raquo;

@@ -3,7 +3,7 @@ include ../../mixins/alert.pug
 block main 
     +alert_success(5000)
     h2 Phân quyền
-    //- div #{records}
+    
     if(records)
         div(data-records = records)
         div(class="text-right")
