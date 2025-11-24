@@ -36,22 +36,60 @@ module.exports.create = async (req, res) => {
 module.exports.createPost = async (req, res) => {
     req.body.password = md5(req.body.password) // Mã hóa mật khẩu thành 1 chuỗi string random
 
-    // Tìm trong DB có tài khoản là email này chưa
+    // Tìm trong DB có email người dùng nhập đã tồn tại chưa ?
     const emailExis = await Account.findOne({
         deleted: false,
         email: req.body.email
     })
-    // Nếu có 
+    // Nếu có tồn tại trong DB thì in thông báo email đã tồn tại
     if (emailExis) {
         req.flash("error", "Email này đã tồn tại !");
         const backURL = req.get("Referer") || "/admin/account";
         res.redirect(backURL);
     }
-    // Nếu không  
+    // Nếu không cho người dùng tạo tài khoản
     else {
         await Account.create(req.body);
         req.flash("success", "Tạo tài khoản thành công");
         res.redirect("/admin/account");
     }
 
+}
+module.exports.edit = async (req, res) => {
+    const id = req.params.id;
+    const find = {
+        _id: id,
+        deleted: false
+    }
+    const roles = await Role.find({
+        deleted: false
+    })
+    const records = await Account.findOne(find)
+    res.render('admin/pages/account/edit', { title: "Chỉnh sửa tài khoản", records: records, roles: roles })
+}
+module.exports.editPatch = async (req, res) => {
+    const id = req.params.id;
+
+
+    const emailExis = await Account.findOne({
+        _id: { $ne: id },
+        deleted: false,
+        email: req.body.email
+    })
+
+    if (emailExis) {
+        req.flash("error", "Email này đã tồn tại !");
+        const backURL = req.get("Referer") || "/admin/account";
+        res.redirect(backURL);
+    } else {
+        if (req.body.password) {
+            req.body.password = md5(req.body.password)
+        } else {
+            delete req.body.password;
+        }
+        await Account.updateOne({ _id: id }, req.body);
+        req.flash("success", "Cập nhập tài khoản thành công!");
+        res.redirect("/admin/account")
+
+    }
 }

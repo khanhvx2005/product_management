@@ -1,0 +1,49 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+block main 
+    
+    +alert_error("5000")
+    h2 Chỉnh Sửa Tài Khoản 
+    form(action=`/admin/account/edit/${records.id}?_method=PATCH` 
+    method="POST" 
+    enctype="multipart/form-data")
+        
+        div(class="form-group")
+            label(for = "fullname") Họ tên *
+            input(type = "text" class = "form-control" id = "fullname" name = "fullname" value = records.fullname) 
+        div(class="form-group")
+            label(for = "email") Email *
+            input(type = "text" class = "form-control" id = "email " name = "email" value = records.email ) 
+        div(class="form-group")
+            label(for = "password") Mật khẩu *
+            input(class = "form-control" id = "password" name = "password" type = "password" autocomplete = "new-password") 
+        div(class="form-group")
+            label(for = "phone") Điện thoại
+            input(type = "text" class = "form-control" id = "phone " name = "phone" value = records.phone )
+        
+        
+        div(class="form-group" upload-image)
+            label(for = "avatar") Ảnh
+            button(type = "button" class = "btn btn-success") X
+            input(type = "file" class = "form-control-file" id = "avatar" name = "avatar" accept = "image/*" upload-image-input)
+            img(src = records.avatar alt = records.fullname upload-image-priview )
+        div(class="form-group")
+            label(for = "role_id") Phân quyền 
+            select(class="form-control" name = "role_id" id = "role_id") 
+                each item , index in roles
+                    option(
+                        value = item.id 
+                        selected = (item.id == records.role_id ? true : false)
+                        ) #{item.title} 
+
+        div(class="form-group")
+            label Trạng thái
+            div
+                div(class=" form-check form-check-inline") 
+                    input(type = "radio" class = "form-check-input" id = "active" name = "status" value = "active" checked= (records.status === "active" ? true : false)) 
+                    label(for = "active" class = "for   m-check-label" ) Hoạt động
+                div(class="form-check form-check-inline")
+                    input(type = "radio" class = "form-check-input" id = "inactive" name = "status" value = "inactive" checked= (records.status === "inactive" ? true : false))
+                    label(for = "inactive" class = "form-check-label" ) Dừng hoạt động
+
+        button(type = "submit" class = "btn btn-primary") Cập nhập

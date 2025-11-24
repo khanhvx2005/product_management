@@ -41,5 +41,6 @@ block main
                                     button(type="button" class="btn btn-danger ml-1 btn-sm" button-delete-item data-id = item.id) Xóa
                                     a( class="btn btn-primary ml-1 btn-sm" href = `/admin/account/detail/${item.id}`) Chi tiết
                     else 
-                        tr 
-                            td Chưa có nhóm quyền nào được tạo
+                        p Chưa có nhóm quyền nào được tạo
+                        p Vui lòng tạo nhóm quyền
+                            a(href = `${prifixAmin}/roles/create` class = "btn btn-success" ) + Thêm mới nhóm quyền
