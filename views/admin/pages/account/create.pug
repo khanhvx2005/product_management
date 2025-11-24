@@ -2,35 +2,45 @@ extends ../../layouts/default.pug
 include ../../mixins/alert.pug
 block main 
     +alert_success("5000")
+    +alert_error("5000")
     h2 Thêm mới tài khoản
-    form(action = "/admin/account/create"
-    method = "POST")
-        div(class = "form-group")
-            label(for = "fullname") Họ và tên
-            input(class = "form-control" type = "text" name = "fullname" id = "fullname")
-        div(class = "form-group")   
-            label(for = "email")    Email
-            input(class = "form-control" type = "text" name = "email" id = "email" )
-        div(class = "form-group")   
-            label(for = "password")    Mật khẩu
-            input(class = "form-control" type = "password" name = "password" id = "password" )
-        div(class = "form-group")   
-            label(for = "phone")    Số điện thoại
-            input(class = "form-control" type = "text" name = "phone" id = "phone" )
-        div(class="form-group" upload-image)
-            label(for = "avatar") Ảnh
-            button(type = "button" class = "btn btn-success") X
-            input(type = "file" class = "form-control-file" id = "avatar" name = "avatar" accept = "image/*" upload-image-input)
-            img(src = "" alt = "" upload-image-priview ) 
+    if(roles)
+        form(action = "/admin/account/create"
+        method = "POST")
+            div(class = "form-group")
+                label(for = "fullname") Họ và tên
+                input(class = "form-control" type = "text" name = "fullname" id = "fullname")
+            div(class = "form-group")   
+                label(for = "email")    Email
+                input(class = "form-control" type = "text" name = "email" id = "email" )
+            div(class = "form-group")   
+                label(for = "password")    Mật khẩu
+                input(class = "form-control" type = "password" name = "password" id = "password" )
+            div(class = "form-group")   
+                label(for = "phone")    Số điện thoại
+                input(class = "form-control" type = "text" name = "phone" id = "phone" )
+            div(class="form-group" upload-image)
+                label(for = "avatar") Ảnh
+                button(type = "button" class = "btn btn-success") X
+                input(type = "file" class = "form-control-file" id = "avatar" name = "avatar" accept = "image/*" upload-image-input)
+                img(src = "" alt = "" upload-image-priview ) 
+            div(class="form-group")
+                label(for = "role_id") Phân quyền 
+                select(class="form-control" name = "role_id" id = "role_id") 
+                    each item , index in roles
+                        option(value = item.id) #{item.title}
 
-        div(class="form-group")
-            label Trạng thái
-            div
-                div(class=" form-check form-check-inline") 
-                    input(type = "radio" class = "form-check-input" id = "active" name = "status" value = "active" checked) 
-                    label(for = "active" class = "form-check-label") Hoạt động
-                div(class="form-check form-check-inline")
-                    input(type = "radio" class = "form-check-input" id = "inactive" name = "status" value = "inactive")
-                    label(for = "inactive" class = "form-check-label") Dừng hoạt động
-        div(class="form-group")
-            button(class= "btn btn-outline-success" type = "submit") Tạo mới
+            div(class="form-group")
+                label Trạng thái
+                div
+                    div(class=" form-check form-check-inline") 
+                        input(type = "radio" class = "form-check-input" id = "active" name = "status" value = "active" checked) 
+                        label(for = "active" class = "form-check-label") Hoạt động
+                    div(class="form-check form-check-inline")
+                        input(type = "radio" class = "form-check-input" id = "inactive" name = "status" value = "inactive")
+                        label(for = "inactive" class = "form-check-label") Dừng hoạt động
+            div(class="form-group")
+                button(class= "btn btn-outline-success" type = "submit") Tạo mới
+    else
+
+        a(href = `${prifixAmin}/roles/create` class = "btn btn-success" ) + Thêm mới nhóm quyền
