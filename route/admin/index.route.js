@@ -3,12 +3,14 @@ const routeProduct = require('./product.route')
 const routeProductCategory = require('./productCategory.route')
 const routeRole = require('./role.route')
 const routeAccount = require('./account.route')
+const routeAuth = require('./auth.route')
 module.exports = (app) => {
-    app.use("/admin", routeDashboard)
+    app.use("/admin/dashboard", routeDashboard)
     app.use("/admin/products", routeProduct)
     app.use("/admin/products-category", routeProductCategory)
     app.use("/admin/roles", routeRole)
     app.use("/admin/account", routeAccount)
+    app.use("/admin/auth", routeAuth)
 
 
 }
