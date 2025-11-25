@@ -13,13 +13,17 @@ mixin table-tree(records , level = 1)
             td 
                 input(min = "1" value = item.position type = "number" style ="width:60px" name = "position")
             td
-                if(item.status == "active") 
-                    a(class = "badge badge-success" href = "javascript:;" data-id = item.id data-status = item.status button-status) Hoạt động
-                else 
-                    a(class = "badge badge-danger" href = "javascript:;" data-id = item.id data-status = item.status button-status) Dừng hoạt động
+                if(role.permissions.includes("products-category_edit"))
+                    if(item.status == "active") 
+                        a(class = "badge badge-success" href = "javascript:;" data-id = item.id data-status = item.status button-status) Hoạt động
+                    else 
+                        a(class = "badge badge-danger" href = "javascript:;" data-id = item.id data-status = item.status button-status) Dừng hoạt động
+                
             td
-                a( class="btn btn-success ml-1 btn-sm" href = `/admin/products-category/edit/${item.id}`) Sửa
-                button(type="button" class="btn btn-danger ml-1 btn-sm" button-delete-item data-id = item.id) Xóa
+                if(role.permissions.includes("products-category_edit"))
+                    a( class="btn btn-success ml-1 btn-sm" href = `/admin/products-category/edit/${item.id}`) Sửa
+                if(role.permissions.includes("products-category_delete"))
+                    button(type="button" class="btn btn-danger ml-1 btn-sm" button-delete-item data-id = item.id) Xóa
                 a( class="btn btn-primary ml-1 btn-sm" href = `/admin/products-category/detail/${item.id}`) Chi tiết
         if item.children && item.children.length > 0
                 +table-tree(item.children,level + 1)

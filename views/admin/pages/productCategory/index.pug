@@ -3,55 +3,57 @@ include ../../mixins/table-tree.pug
 include ../../mixins/filter-search.pug
 include ../../mixins/alert.pug
 block main 
-    +alert_success("5000")
-    h2 Trang danh mục sản phẩm
-    +filter-search(filter)
-    //- div #{records}
-    div(class="card mb-3")
-        div(class="card-header") Danh sách sản phẩm
-        div(class="card-body" )
-            div(class="row") 
-                 
-                div(class="col-3")
-                    form(
-                        action = "/admin/products-category/change-multi?_method=PATCH"
-                        method = "POST"
-                        id = "form-change-multi"
-                    )
-                        div(class="input-group" style = {padding:"10px"})
-                            select(name = "type" class="form-control")
-                                option(disabled selected) Chọn hành động
-                                option(value = "active") Hoạt động
-                                option(value = "inactive") Dừng hoạt động
-                                option(value = "delete-all") Xóa tất cả
-                                option(value = "change-position") Thay đổi vị trí
-                            input(class="form-control d-none" name = "ids" type = "text")
-                            div(class = "input-group-append")
-                                button(type="submit" class="btn btn-success") Áp dụng
-                div(class="col-9 d-flex justify-content-end align-items-center")
-                    a(href = `${prifixAmin}/products-category/create` class = "btn btn-success" ) + Thêm mới
-    table(class = "table table-hover" check-box)
-        thead
-            tr
-                th 
-                    input(type = "checkbox" name = "checkall" ) 
-                th STT 
-                th Tiêu đề
-                th Hình ảnh
-                th Vị trí
-                th Trạng thái 
-                th Hành động
-        tbody
-            
-            +table-tree(records)
-    form(action=""
-        method = "POST"
-        path ="/admin/products-category/change-status"
-        form-change-status )
-    form(action = ""
-        method = "POST"
-        form-delete-item
-        path = "/admin/products-category/delete")
+    if(role.permissions.includes("products-category_view"))
+        +alert_success("5000")
+        h2 Trang danh mục sản phẩm
+        +filter-search(filter)
+        //- div #{records}
+        div(class="card mb-3")
+            div(class="card-header") Danh sách sản phẩm
+            div(class="card-body" )
+                div(class="row") 
+                    
+                    div(class="col-3")
+                        form(
+                            action = "/admin/products-category/change-multi?_method=PATCH"
+                            method = "POST"
+                            id = "form-change-multi"
+                        )
+                            div(class="input-group" style = {padding:"10px"})
+                                select(name = "type" class="form-control")
+                                    option(disabled selected) Chọn hành động
+                                    option(value = "active") Hoạt động
+                                    option(value = "inactive") Dừng hoạt động
+                                    option(value = "delete-all") Xóa tất cả
+                                    option(value = "change-position") Thay đổi vị trí
+                                input(class="form-control d-none" name = "ids" type = "text")
+                                div(class = "input-group-append")
+                                    button(type="submit" class="btn btn-success") Áp dụng
+                    div(class="col-9 d-flex justify-content-end align-items-center")
+                        if(role.permissions.includes("products-category_create"))
+                            a(href = `${prifixAmin}/products-category/create` class = "btn btn-success" ) + Thêm mới
+        table(class = "table table-hover" check-box)
+            thead
+                tr
+                    th 
+                        input(type = "checkbox" name = "checkall" ) 
+                    th STT 
+                    th Tiêu đề
+                    th Hình ảnh
+                    th Vị trí
+                    th Trạng thái 
+                    th Hành động
+            tbody
+                
+                +table-tree(records)
+        form(action=""
+            method = "POST"
+            path ="/admin/products-category/change-status"
+            form-change-status )
+        form(action = ""
+            method = "POST"
+            form-delete-item
+            path = "/admin/products-category/delete")
             
 
             
