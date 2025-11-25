@@ -1,3 +1,4 @@
+const { response } = require('express');
 const Account = require('../../model/account.model')
 var md5 = require('md5'); // Mã hóa thành 1 chuỗi string j đó.
 
@@ -38,4 +39,8 @@ module.exports.loginPost = async (req, res) => {
     res.cookie("token", user.token)
     res.redirect("/admin/dashboard")
 
+}
+module.exports.logout = (req, res) => {
+    res.clearCookie("token")
+    res.redirect("/admin/auth/login")
 }
