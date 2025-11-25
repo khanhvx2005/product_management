@@ -2,6 +2,12 @@ const Account = require('../../model/account.model')
 var md5 = require('md5'); // Mã hóa thành 1 chuỗi string j đó.
 
 module.exports.login = (req, res) => {
+    // if (req.cookies.token) {
+    //     res.redirect("/admin/dashboard")
+    // } else {
+    //     res.render("admin/pages/auth/login", { title: "Đăng nhập" })
+
+    // }
     res.render("admin/pages/auth/login", { title: "Đăng nhập" })
 }
 module.exports.loginPost = async (req, res) => {
