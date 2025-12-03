@@ -100,7 +100,13 @@ module.exports.changeMulti = async (req, res) => {
             res.redirect(backURL);
             break;
         case "delete-all":
-            await Product.updateMany({ _id: { $in: ids } }, { deleted: true })
+            await Product.updateMany({ _id: { $in: ids } }, {
+                deleted: true,
+                deleteBy: {
+                    account_id: res.locals.user.id,
+                    deleteAt: new Date(),
+                }
+            })
             req.flash('success', 'Xóa sản phẩm thành công !');
 
             res.redirect(backURL);
@@ -128,7 +134,14 @@ module.exports.changeMulti = async (req, res) => {
 // [DELETE] /admin/products/delete/:id
 module.exports.deleteItem = async (req, res) => {
     const id = req.params.id;
-    await Product.updateOne({ _id: id }, { deleted: true })
+    await Product.updateOne({ _id: id }, {
+        deleted: true,
+        deleteBy: {
+            account_id: res.locals.user.id,
+            deleteAt: new Date(),
+        }
+
+    })
     req.flash('success', 'Xóa sản phẩm thành công !');
     const backURL = req.get("Referer") || "/admin/products";
     res.redirect(backURL);

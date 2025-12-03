@@ -22,10 +22,17 @@ const productSchema = new mongoose.Schema({
       default: Date.now
     }
   },
-  deleted: { type: Boolean, default: false },
+  deleted: {
+    type: Boolean,
+
+    default: false
+  },
   thumbnail: String,
   status: String,
-
+  deleteBy: {
+    account_id: String,
+    deleteAt: Date
+  }
 
 }, { timestamps: true });
 const Product = mongoose.model('Product', productSchema);
