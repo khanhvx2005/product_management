@@ -1,5 +1,6 @@
 const flash = require('express-flash')
 const express = require('express')
+const moment = require('moment')
 const cookieParser = require('cookie-parser')
 const expressSession = require('express-session')
 const bodyParser = require('body-parser')
@@ -24,6 +25,8 @@ app.use(express.static(`${__dirname}/public`))
 // body-parser
 app.use(methodOverride('_method'))
 app.locals.prifixAmin = '/admin';
+app.locals.moment = moment;
+
 // end body-parser
 
 //flash

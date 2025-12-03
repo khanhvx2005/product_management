@@ -253,25 +253,29 @@ h1 {
     position: absolute;
     top: 15px;
     right: 15px;
-    
+
 
 }
 
 .form-group[upload-image] .btn-success {
     /* Điều chỉnh nút X cho gọn gàng */
-    padding: 2px 8px; 
+    padding: 2px 8px;
     font-size: 12px;
     font-weight: bold;
     line-height: 1.2;
-    margin-left: 5px; /* Khoảng cách với label */
-    border-radius: 50%; /* Làm cho nút tròn */
+    margin-left: 5px;
+    /* Khoảng cách với label */
+    border-radius: 50%;
+    /* Làm cho nút tròn */
     width: 25px;
     height: 25px;
-    display:none;
+    display: none;
 }
-.form-group[upload-image]  .btn-success.show {
-    display:block;
+
+.form-group[upload-image] .btn-success.show {
+    display: block;
 }
+
 img[upload-image-priview] {
     margin-top: 10px;
     display: block;
@@ -293,34 +297,42 @@ img[upload-image-priview][src=""] {
 /* chi tiet san pham */
 
 .product-detail-card {
-    display:flex;
+    display: flex;
     justify-content: flex-start;
     align-items: center;
     padding: 20px 30px 40px;
-    background-color: #ffffff; /* Giữ nền trắng cho toàn bộ card */
-    border-radius: 8px; /* Bo góc nhẹ cho toàn bộ card */
+    background-color: #ffffff;
+    /* Giữ nền trắng cho toàn bộ card */
+    border-radius: 8px;
+    /* Bo góc nhẹ cho toàn bộ card */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
+
 .product-title {
-    
+
     color: #007bff;
-    
+
 }
 
 /* --- 2. Bố cục 2 Cột (Flexbox) --- */
 
 .product-attributes {
     display: flex;
-    gap: 40px; /* Khoảng cách giữa hai cột chính */
+    gap: 40px;
+    /* Khoảng cách giữa hai cột chính */
     margin-bottom: 30px;
 }
 
 .attribute-group {
-    flex: 1; 
-    padding: 20px; /* Thêm padding bên trong để tạo không gian cho background */
-    background-color: #f8f9fa; /* Màu nền nhẹ cho từng cột */
-    border-radius: 6px; /* Bo góc cho từng cột */
-    border: 1px solid #e9ecef; /* Viền nhẹ để tách biệt */
+    flex: 1;
+    padding: 20px;
+    /* Thêm padding bên trong để tạo không gian cho background */
+    background-color: #f8f9fa;
+    /* Màu nền nhẹ cho từng cột */
+    border-radius: 6px;
+    /* Bo góc cho từng cột */
+    border: 1px solid #e9ecef;
+    /* Viền nhẹ để tách biệt */
 }
 
 /* Thêm đường kẻ chia cột nhẹ nhàng */
@@ -331,13 +343,15 @@ img[upload-image-priview][src=""] {
 /* --- 3. Tạo kiểu Dòng thông tin --- */
 
 .attribute-line {
-    display: flex; /* Dùng flex cho mỗi dòng để căn chỉnh nhãn/giá trị */
+    display: flex;
+    /* Dùng flex cho mỗi dòng để căn chỉnh nhãn/giá trị */
     margin-bottom: 15px;
     font-size: 16px;
 }
 
 .attribute-line .label {
-    min-width: 120px; /* Giữ cho nhãn có độ rộng tối thiểu */
+    min-width: 120px;
+    /* Giữ cho nhãn có độ rộng tối thiểu */
     font-weight: 500;
     color: #495057;
 }
@@ -351,11 +365,13 @@ img[upload-image-priview][src=""] {
 /* --- 4. Hình ảnh và Nút --- */
 
 .thumbnail-line img {
-    width: 200px; /* Chiều rộng cố định */
+    width: 200px;
+    /* Chiều rộng cố định */
     height: auto;
     border: 1px solid #dee2e6;
     border-radius: 4px;
-    margin-top: -5px; /* Điều chỉnh lại căn chỉnh */
+    margin-top: -5px;
+    /* Điều chỉnh lại căn chỉnh */
 }
 
 /* Xử lý Mô tả để nó không nằm trên cùng một dòng với nhãn */
@@ -364,9 +380,11 @@ img[upload-image-priview][src=""] {
 }
 
 .description-line .value {
-    display: block; /* Giá trị mô tả chiếm dòng riêng */
+    display: block;
+    /* Giá trị mô tả chiếm dòng riêng */
     margin-top: 5px;
     font-weight: 400;
     line-height: 1.6;
 }
+
 /* end chi tiet san pham */

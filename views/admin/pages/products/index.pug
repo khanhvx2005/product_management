@@ -3,6 +3,7 @@ include ../../mixins/alert.pug
 include ../../mixins/sort.pug
 include ../../mixins/filter-search.pug
 include ../../mixins/panination.pug
+include ../../mixins/moment.pug
 block main 
     if(role.permissions.includes("products_view"))
 
@@ -54,6 +55,7 @@ block main
                             th Giá
                             th Vị trí
                             th Trạng thái 
+                            th Ngày tạo
                             th Hành động
                     tbody
                         each item , index in products
@@ -74,6 +76,8 @@ block main
                                             a(class = "badge badge-success" href = "javascript:;" data-id = item.id data-status = item.status button-status) Hoạt động
                                         else 
                                             a(class = "badge badge-danger" href = "javascript:;" data-id = item.id data-status = item.status button-status) Dừng hoạt động
+                                td 
+                                    +formatDate(item.createBy.createAt)
                                 td
                                     if(role.permissions.includes("products_edit"))
 

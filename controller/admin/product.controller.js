@@ -2,6 +2,7 @@
 const Product = require('../../model/product.model')
 const validate = require('../../validates/product.validate')
 const productCategory = require('../../model/productCategory.model')
+const Account = require('../../model/account.model')
 // [GET] /admin/product-category
 const createTreeHelper = require('../../helpers/createTree')
 module.exports.index = async (req, res) => {
@@ -60,6 +61,14 @@ module.exports.index = async (req, res) => {
     // end sort
     // console.log(panination);
     const products = (await Product.find(find).sort(sort).limit(panination.limitItem).skip(panination.skip))
+    for (const product of products) {
+        const user = await Account.findOne({
+            _id: product.createBy.account_id
+        })
+        if (user) {
+            product.accountFullName = user.fullname;
+        }
+    }
 
     res.render('admin/pages/products/index', { title: "Trang sản phẩm", products: products, filter: filter, keyword: keyword, panination: panination })
 }
@@ -164,6 +173,7 @@ module.exports.storagePatch = async (req, res) => {
 }
 // [GET] /admin/products/create
 module.exports.create = async (req, res) => {
+    // console.log(res.locals.user);
     const find = {
         deleted: false
     }
@@ -184,6 +194,9 @@ module.exports.createPost = async (req, res) => {
         req.body.position = count + 1;
     } else {
         req.body.position = parseInt(req.body.position);
+    }
+    req.body.createBy = {
+        account_id: res.locals.user.id
     }
 
     await Product.create(req.body);
