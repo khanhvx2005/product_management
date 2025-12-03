@@ -62,12 +62,25 @@ module.exports.index = async (req, res) => {
     // console.log(panination);
     const products = (await Product.find(find).sort(sort).limit(panination.limitItem).skip(panination.skip))
     for (const product of products) {
+        // Lấy thông tin chi tiết của người tạo
         const user = await Account.findOne({
             _id: product.createBy.account_id
         })
         if (user) {
             product.accountFullName = user.fullname;
         }
+        // Lấy thông tin chi tiết của người cập nhập
+        const updatedBy = product.updatedBy.slice(-1)[0];
+        if (updatedBy) {
+            const userUpdated = await Account.findOne({
+                _id: updatedBy.account_id
+            })
+
+            updatedBy.accountFullName = userUpdated.fullname;
+
+        }
+
+
     }
 
     res.render('admin/pages/products/index', { title: "Trang sản phẩm", products: products, filter: filter, keyword: keyword, panination: panination })
@@ -76,7 +89,12 @@ module.exports.index = async (req, res) => {
 module.exports.changeStatus = async (req, res) => {
     const id = req.params.id;
     const status = req.params.status;
-    await Product.updateOne({ _id: id }, { status: status })
+    const updatedBy = {
+        account_id: res.locals.user.id,
+        updatedAt: new Date()
+    }
+
+    await Product.updateOne({ _id: id }, { status: status, $push: { updatedBy: updatedBy } })
     req.flash('success', 'Cập nhập sản phẩm thành công !');
 
     const backURL = req.get('Referer') || '/admin/products';
@@ -88,14 +106,18 @@ module.exports.changeMulti = async (req, res) => {
     const ids = req.body.ids.split(",");
 
     const backURL = req.get('Referer') || "/admin/products";
+    const updatedBy = {
+        account_id: res.locals.user.id,
+        updatedAt: new Date()
+    }
     switch (type) {
         case "active":
-            await Product.updateMany({ _id: { $in: ids } }, { status: type })
+            await Product.updateMany({ _id: { $in: ids } }, { status: type, $push: { updatedBy: updatedBy } })
             req.flash('success', 'Cập nhập trạng thái nhiều sản phẩm thành công !');
             res.redirect(backURL);
             break;
         case "inactive":
-            await Product.updateMany({ _id: { $in: ids } }, { status: type })
+            await Product.updateMany({ _id: { $in: ids } }, { status: type, $push: { updatedBy: updatedBy } })
             req.flash('success', 'Cập nhập trạng thái sản phẩm thành công !');
             res.redirect(backURL);
             break;
@@ -117,7 +139,7 @@ module.exports.changeMulti = async (req, res) => {
             for (element of ids) {
                 let [id, position] = element.split("-");
                 position = parseInt(position);
-                await Product.updateOne({ _id: id }, { position: position })
+                await Product.updateOne({ _id: id }, { position: position, $push: { updatedBy: updatedBy } })
 
             }
 
@@ -235,10 +257,17 @@ module.exports.editPatch = async (req, res) => {
     req.body.discountPercentage = parseInt(req.body.discountPercentage);
     req.body.stock = parseInt(req.body.stock);
     req.body.position = parseInt(req.body.position);
-    if (req.file) {
-        req.body.thumbnail = `/uploads/${req.file.filename}`;
+    // if (req.file) {
+    //     req.body.thumbnail = `/uploads/${req.file.filename}`;
+    // }
+    const updatedBy = {
+        account_id: res.locals.user.id,
+        updatedAt: new Date()
     }
-    await Product.updateOne({ _id: req.params.id }, req.body)
+    await Product.updateOne({ _id: req.params.id }, {
+        ...req.body,
+        $push: { updatedBy: updatedBy }
+    })
     req.flash("success", "Chỉnh sửa thành công !");
     res.redirect("/admin/products")
 }
