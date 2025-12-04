@@ -80,13 +80,13 @@ block main
                                 td 
                                     p #{item.accountFullName}
                                     p
-                                        +formatDate(item.createBy.createAt)
+                                        +formatDateTime(item.createBy.createAt)
                                 td 
                                     - const updatedBy = item.updatedBy.slice(-1)[0];
                                     if(updatedBy)
                                         p #{updatedBy.accountFullName}
                                         p
-                                            +formatDate(updatedBy.updatedAt)
+                                            +formatDateTime(updatedBy.updatedAt)
                                 td
                                     if(role.permissions.includes("products_edit"))
 

@@ -180,7 +180,6 @@ module.exports.storage = async (req, res) => {
 }
 // [PATCH] /admin/products/storage
 module.exports.storagePatch = async (req, res) => {
-    console.log(req.params);
     const backURL = req.get("Referer") || "admin/products";
     const id = req.params.id;
 

@@ -6,4 +6,5 @@ header(class="header")
                     a(href = "/admin/dashboard") ADMIN
             div(class="col-9 ")
                 div(class="text-right " style = "padding-top:5px")
-                    a(href = "/admin/auth/logout" class = "btn btn-primary ") Đăng xuất
+                    a(href = "/admin/my-account" class = "btn btn-primary btn-sm mr-2") #{user.fullname}
+                    a(href = "/admin/auth/logout" class = "btn btn-danger btn-sm") Đăng xuất
