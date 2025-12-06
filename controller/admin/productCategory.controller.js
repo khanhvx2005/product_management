@@ -63,18 +63,24 @@ module.exports.create = async (req, res) => {
 }
 // [PATCH] /admin/product-category/create
 module.exports.createPost = async (req, res) => {
-
-    if (req.body.position == "") {
-        const count = await productCategory.countDocuments();
-        req.body.position = count + 1;
+    const permissions = res.locals.role.permissions;
+    if (permissions.includes("products-category_create")) {
+        if (req.body.position == "") {
+            const count = await productCategory.countDocuments();
+            req.body.position = count + 1;
+        } else {
+            req.body.position = parseInt(req.body.position);
+        }
+        req.body.createdBy = {
+            account_id: res.locals.user.id
+        }
+        await productCategory.create(req.body);
+        res.redirect("/admin/products-category");
     } else {
-        req.body.position = parseInt(req.body.position);
+        res.send("403")
+        return;
     }
-    req.body.createdBy = {
-        account_id: res.locals.user.id
-    }
-    await productCategory.create(req.body);
-    res.redirect("/admin/products-category");
+
 }
 // [GET] /admin/products-category/edit/:id
 module.exports.edit = async (req, res) => {
