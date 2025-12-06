@@ -187,97 +187,329 @@
 
 /* end section-one */
 /* chi tiet san pham */
-/* --- 1. Thiết lập Chung --- */
-
-.section-two {
-    padding: 40px 0;
-    background-color: #ffffff;
-}
-
-
-
-/* --- 2. Hình ảnh Sản phẩm (Cột 1) --- */
-
-.product-main-image-wrap {
-    border: 1px solid #eeeeee;
+.inner-desc .inner-desc {
+    display: flex;
+    flex-direction: column;
+    background: white;
     border-radius: 8px;
-    padding: 10px;
-    background-color: #fcfcfc;
-    text-align: center;
+    padding: 16px;
+    gap: 4px;
 }
 
-.product-main-image-wrap img {
+.inner-desc .content {
+    line-height: 150%;
+    display: inline-block;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 150%;
+    padding-top: 8px;
+    color: rgb(36, 36, 36);
+    text-align: justify;
+    border-radius: 4px;
+
+
+}
+
+.inner-desc .content p {
+    margin-top: 5px;
+    margin-bottom: 12px;
+    line-height: 21px;
+    word-break: break-word;
+    margin: 0px 0px 10px;
+}
+
+.product-detail-page {
+    background-color: #f5f5fa;
+    /* Nền xám nhạt cho cả trang */
+    padding: 20px 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.inner-image-box,
+.inner-info-box,
+.inner-actions {
+    background: #fff;
+    border-radius: 8px;
+    padding: 16px;
+    height: 100%;
+    /* Giúp các cột cao bằng nhau nếu dùng flex */
+}
+
+.inner-main-image {
+    text-align: center;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    overflow: hidden;
+    padding: 10px;
+}
+
+.inner-main-image img {
     max-width: 100%;
     height: auto;
-    display: block;
-    border-radius: 6px;
-    width: 100%;
+    object-fit: contain;
 }
 
-/* --- 3. Nội dung Sản phẩm (Cột 2) --- */
-
-.product-content-col {
-    padding: 0 15px;
+/* --- CỘT 2: THÔNG TIN CHI TIẾT --- */
+.inner-title {
+    font-size: 24px;
+    font-weight: 500;
+    margin: 0 0 8px;
+    line-height: 1.4;
+    color: #333;
 }
 
-.product-title {
-    font-size: 36px;
-    font-weight: 700;
-    color: #333333;
+.inner-meta {
+    font-size: 13px;
+    color: #787878;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+}
+
+.inner-meta a {
+    color: #0b74e5;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.inner-price-wrap {
+    background: #fafafa;
+    padding: 12px;
+    border-radius: 4px;
     margin-bottom: 20px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
 }
 
-/* --- 4. Khu vực Giá (Nổi bật) --- */
-
-.product-price-section {
-    padding: 15px 20px;
-    background-color: #fff0f0;
-    /* Nền màu hồng nhạt */
-    border-radius: 6px;
-    margin-bottom: 30px;
+.inner-price-new {
+    font-size: 26px;
+    font-weight: 700;
+    color: #ff424e;
 }
 
-.price-new {
-    font-size: 38px;
-    font-weight: 800;
-    color: #ff4d4f;
-    /* Màu đỏ nổi bật */
-    display: inline-block;
-    margin-right: 15px;
-}
-
-.price-old {
-    font-size: 18px;
-    color: #999999;
-    display: inline-block;
+.inner-price-old {
+    color: #808089;
     text-decoration: line-through;
-}
-
-.discount-percent {
     font-size: 14px;
-    color: #ff4d4f;
-    font-weight: 600;
-    margin-bottom: 5px;
 }
 
-/* --- 5. Thông tin chi tiết (Info Lines) --- */
-
-.product-info-section {
-    margin-bottom: 40px;
-    padding-bottom: 20px;
+.inner-percent {
+    color: #ff424e;
+    background: #fff0f1;
+    border: 1px solid #ff424e;
+    padding: 0 4px;
+    border-radius: 2px;
+    font-size: 12px;
 }
 
-.detail-line {
-    font-size: 16px;
-    color: #555555;
+/* Thuộc tính */
+.inner-attributes .attribute-item {
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.inner-attributes .label {
+    color: #808089;
+    min-width: 100px;
+    display: inline-block;
+}
+
+/* Mô tả */
+.inner-desc {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+
+.inner-desc .label {
+    font-weight: 700;
+    font-size: 15px;
     margin-bottom: 10px;
+    display: block;
 }
 
-.detail-line b {
-    color: #333333;
-    font-weight: 600;
-    margin-left: 5px;
+.inner-desc .content {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #444;
+    text-align: justify;
 }
+
+/* --- CỘT 3: BUY BOX (KHUNG MUA HÀNG) --- */
+/* Tạo viền nổi bật cho khung này */
+.col-4 form {
+    height: 100%;
+}
+
+.inner-actions {
+    border: 1px solid #ddd;
+    /* Viền bao quanh khung mua */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    /* Đổ bóng nhẹ */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* --- 1. KHUNG BAO NGOÀI --- */
+.inner-actions {
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    /* Viền nhẹ */
+    border-radius: 8px;
+    /* Bo góc mềm mại */
+    padding: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    /* Đổ bóng nhẹ tạo chiều sâu */
+}
+
+/* --- 2. Ô CHỌN SỐ LƯỢNG --- */
+.quantity-control {
+    display: flex !important;
+    /* Ép hiển thị hàng ngang */
+    align-items: center !important;
+    flex-wrap: nowrap !important;
+    /* Cấm xuống dòng */
+
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 120px;
+    /* Chiều rộng cố định */
+    overflow: hidden;
+}
+
+.quantity-control button {
+    width: 35px !important;
+    /* Cố định chiều rộng nút */
+    height: 32px !important;
+    background: #fff;
+    border: none;
+    cursor: pointer;
+    flex-shrink: 0;
+    /* Không cho nút bị co lại */
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Ô nhập số ở giữa */
+.quantity-control input {
+    width: 50px !important;
+    /* Cố định chiều rộng ô nhập */
+    height: 32px !important;
+    border: none !important;
+    border-left: 1px solid #eee !important;
+    border-right: 1px solid #eee !important;
+    text-align: center;
+    margin: 0 !important;
+    /* Xóa margin thừa nếu có */
+    outline: none;
+    flex-shrink: 0;
+    /* Không cho ô nhập bị co lại */
+}
+
+/* Ẩn mũi tên mặc định của input number */
+.quantity-control input::-webkit-outer-spin-button,
+.quantity-control input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.quantity-box .label {
+    font-weight: 600;
+    color: #444;
+}
+
+
+
+/* Nút trừ (-) và cộng (+) */
+
+
+
+
+
+
+
+
+/* --- 3. CÁC NÚT BẤM (BUTTON GROUP) --- */
+.button-group {
+    display: flex;
+    flex-direction: column;
+    /* Xếp chồng 2 nút lên nhau */
+    gap: 12px;
+    /* Khoảng cách giữa 2 nút */
+}
+
+/* Nút MUA NGAY (Màu đỏ nổi bật) */
+.btn-buy {
+    background: #ff424e;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 10px 15px;
+    width: 100%;
+    cursor: pointer;
+    text-align: center;
+    transition: transform 0.1s, background 0.2s;
+}
+
+.btn-buy:hover {
+    background: #e03844;
+    transform: translateY(-1px);
+    /* Nổi lên nhẹ khi di chuột */
+}
+
+.btn-buy strong {
+    display: block;
+    font-size: 18px;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+}
+
+.btn-buy span {
+    display: block;
+    font-size: 12px;
+    opacity: 0.9;
+    font-weight: normal;
+}
+
+/* Nút GIỎ HÀNG (Màu trắng viền xanh - Secondary) */
+.btn-success {
+    /* Reset lại style mặc định của Bootstrap nếu có */
+    background-color: #fff !important;
+    color: #0b74e5 !important;
+    border: 1px solid #0b74e5 !important;
+
+    border-radius: 4px;
+    padding: 12px;
+    width: 100%;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.2s;
+}
+
+.btn-success:hover {
+    background-color: #f5fbff !important;
+    /* Xanh nhạt cực nhẹ khi hover */
+}
+
+/* Thêm icon giả lập bằng CSS cho nút giỏ hàng (nếu không dùng FontAwesome) */
+.btn-success::before {
+    content: "+";
+    font-size: 20px;
+    line-height: 1;
+    margin-top: -2px;
+}
+
+
 
 /* end chi tiet san pham */
 /* Sub Menu */

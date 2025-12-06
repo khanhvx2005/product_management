@@ -1,35 +1,55 @@
 extends ../../layouts/default.pug
-block main
-    div(class="section-two product-detail-client")
-    div(class="container")
-        div(class="row") 
-            // Cột 1: Hình ảnh (col-5)
-            div(class="col-5") 
-                if(products.thumbnail)
-                    div(class="product-main-image-wrap")
-                        img(src=products.thumbnail alt="Ảnh sản phẩm")
-            
-            // Cột 2: Nội dung & Giá (col-7)
-            div(class="col-7")
-                if(products.title)
-                    h1(class="product-title") #{products.title}
-
-                // Khu vực Giá
-                div(class="product-price-section")
-                    if(products.discountPercentage)
-                        div(class="discount-percent") Giảm: #{products.discountPercentage}%
-                    if(products.price)
-                        div(class="price-new") #{(products.price *(100 - products.discountPercentage)/100)}$
-                        // Giả định có giá cũ
-                        div(class="price-old") #{products.price}$
-
-                // Khu vực Mô tả & Thông tin
-                div(class="product-info-section")
-                    if(products.description)
-                        div(class="detail-line description-wrap") Mô tả: <b>!{products.description}</b>
-                    if(products.stock)
-                        div(class="detail-line") Còn lại: <b>#{products.stock} sản phẩm</b>
-                    if(products.position)
-                        div(class="detail-line") Vị trí: <b>#{products.position}</b>
-                    
-                
+block main 
+    div(class="product-detail-page")
+        div(class="container-fluid my-5")
+            div(class="row")
+                div(class="col-4")
+                    div(class="inner-image-box")
+                        if(products.thumbnail)
+                            .inner-main-image
+                                img(src=products.thumbnail alt=products.title width = "100%")
+                            
+                div(class="col-4")
+                    div(class="inner-info-box")
+                        if(products.title)
+                            h1(class="inner-title") #{products.title}
+                        div(class="inner-meta")
+                            span.inner-brand Thương hiệu: 
+                                a(href=`/products/${products.category.slug}`) #{products.category.title}
+                        .inner-price-wrap
+                            if(products.priceNew)
+                                .inner-price-new #{products.priceNew.toLocaleString()}đ
+                            if(products.price)
+                                .inner-price-old #{products.price.toLocaleString()}đ
+                            if(products.discountPercentage)
+                                .inner-percent -#{products.discountPercentage}%
+                        .inner-attributes
+                            if(products.stock)
+                                .attribute-item
+                                    span.label Tình trạng:
+                                    span.value.text-success #{products.stock > 0 ? 'Còn hàng' : 'Hết hàng'}
+                            if(products.position)
+                                .attribute-item
+                                    span.label Vị trí kho:
+                                    span.value #{products.position}
+                        if(products.description)
+                            .inner-desc
+                                div.label Mô tả sản phẩm:
+                                div.content !{products.description}
+                div(class="col-4")
+                    form(action=`/cart/add/${products.id}` method="POST")
+                        .inner-actions
+                            .quantity-box
+                                span.label Số lượng:
+                                div.quantity-control
+                                    button(type="button" class="btn-minus") -
+                                    input(type="number" name="quantity" value="1" min="1" max=products.stock)
+                                    button(type="button" class="btn-plus") +
+                            
+                            .button-group
+                                button(type="submit" class="btn btn-buy")
+                                    strong Chọn Mua
+                                    span Giao hàng tận nơi hoặc nhận tại cửa hàng
+                            
+                                button(type="button" class="btn btn-success") Giỏ hàng
+                                    

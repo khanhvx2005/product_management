@@ -20,17 +20,26 @@ module.exports.detail = async (req, res) => {
     try {
         const find = {
             deleted: false,
-            slug: req.params.slug,
+            slug: req.params.slugProduct,
             status: "active"
         }
-        const products = await Product.findOne(find)
-
-        res.render("client/pages/products/detail", { title: products.slug, products: products });
+        const product = await Product.findOne(find)
+        if (product.products_category_id) {
+            const category = await productCategory.findOne({
+                _id: product.products_category_id,
+                status: "active",
+                deleted: false
+            })
+            product.category = category
+        }
+        productsHelpers.priceNewProduct(product)
+        res.render("client/pages/products/detail", { title: product.slug, products: product });
     } catch (error) {
         res.redirect("/products");
     }
 
 }
+// Lấy ra danh sách sản phẩm
 module.exports.category = async (req, res) => {
     const category = await productCategory.findOne({
         slug: req.params.slugCategory,
