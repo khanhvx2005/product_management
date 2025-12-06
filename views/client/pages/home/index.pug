@@ -1,3 +1,12 @@
 extends ../../layouts/default.pug
+include ../../mixins/products-layout.pug
+
 block main 
-    h1 Trang chủ
+    div(class = "section-one")
+        div(class="container")
+            div(class="row")
+                div(class = "col-12")
+                    div(class="inner-head")
+                        h1(class="inner-title") Trang sản phẩm nổi bật
+            +products-grid(productsFeatured)
+            

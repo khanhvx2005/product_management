@@ -1,0 +1,6 @@
+include products-item.pug
+mixin products-grid(products)
+    div(class="row")
+                
+        each item , index  in products
+            +product-item(item)

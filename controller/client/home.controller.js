@@ -1,3 +1,13 @@
+const Product = require('../../model/product.model')
+const productsHelpers = require("../../helpers/products")
 module.exports.index = async (req, res) => {
-    res.render('client/pages/home/index.pug', { title: "Trang chủ" });
+    const find = {
+        deleted: false,
+        featured: "1",
+        status: "active"
+    }
+    const productsFeatured = await Product.find(find);
+    const newProducts = productsHelpers.priceNewProducts(productsFeatured)
+
+    res.render('client/pages/home/index.pug', { title: "Trang chủ", productsFeatured: newProducts });
 }

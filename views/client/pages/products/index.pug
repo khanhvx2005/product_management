@@ -1,4 +1,5 @@
 extends ../../layouts/default.pug
+include ../../mixins/products-layout.pug
 block main 
     
     div(class = "section-one")
@@ -7,18 +8,5 @@ block main
                 div(class = "col-12")
                     div(class="inner-head")
                         h1(class="inner-title") Trang sản phẩm
-            div(class="row")
-                
-                each item , index  in products
-                    div(class="col-4")
-                        div(class="inner-box")
-                            div(class="inner-image")
-                                img(src = item.thumbnail alt = item.title)
-                                div(class="inner-discount") -#{item.discountPercentage}%
-                            div(class="inner-content")
-                                h1(class= "inner-title")
-                                    a(href = `/products/${item.slug}`) #{item.title}
-                                div(class="inner-item")
-                                    p(class="inner-price-new") #{item.priceNew}$
-                                    p(class="inner-price-old") <del>#{item.price}$
+            +products-grid(products)
                 
