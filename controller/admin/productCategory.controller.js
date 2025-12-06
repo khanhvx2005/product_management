@@ -70,7 +70,9 @@ module.exports.createPost = async (req, res) => {
     } else {
         req.body.position = parseInt(req.body.position);
     }
-
+    req.body.createdBy = {
+        account_id: res.locals.user.id
+    }
     await productCategory.create(req.body);
     res.redirect("/admin/products-category");
 }
@@ -148,7 +150,7 @@ module.exports.changeMulti = async (req, res) => {
 module.exports.deleteItem = async (req, res) => {
     const id = req.params.id;
     await productCategory.updateOne({ _id: id }, { deleted: true })
-    req.flash('success', 'Xóa sản phẩm thành công !');
+    req.flash('success', 'Xóa danh mục thành công !');
     const backURL = req.get("Referer") || "/admin/products";
     res.redirect(backURL);
 

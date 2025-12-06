@@ -1,0 +1,7 @@
+extends ../../layouts/default.pug
+block main 
+    h3 Trang chi tiết nhóm quyền
+    if(records)
+        div(class="mb-3") Tiêu đề: <b>#{records.title}</b>
+        div(class="mb-3") Mô tả ngắn: <b>!{records.description}</b>
+        

@@ -16,7 +16,10 @@ module.exports.index = async (req, res) => {
             _id: element.role_id,
             deleted: false
         })
-        element.role = role;
+        if (role) {
+            element.role = role;
+
+        }
     }
     // End Mục đích thay thế id của nhóm quyền bằng title nhóm quyền
 
@@ -92,4 +95,37 @@ module.exports.editPatch = async (req, res) => {
         res.redirect("/admin/account")
 
     }
+}
+module.exports.changeStatus = async (req, res) => {
+    const id = req.params.id;
+    const status = req.params.status;
+    await Account.updateOne({ _id: id }, { status: status })
+    req.flash('success', 'Cập nhập trạng thái tài khoản thành công !');
+
+    const backURL = req.get('Referer') || '/admin/products';
+    res.redirect(backURL);
+}
+module.exports.detail = async (req, res) => {
+    const records = await Account.findOne({
+        _id: req.params.id,
+        deleted: false
+    }).select("-password -token")
+    const roles = await Role.findOne({
+        deleted: false,
+        _id: records.role_id
+    })
+    records.role = roles;
+    res.render("admin/pages/account/detail", { title: "Trang chi tiết tài khoản", records: records })
+}
+module.exports.deleteItem = async (req, res) => {
+    const id = req.params.id;
+    await Account.updateOne({ _id: id }, {
+        deleted: true,
+
+
+    })
+    req.flash('success', 'Xóa tài khoản thành công !');
+    const backURL = req.get("Referer") || "/admin/products";
+    res.redirect(backURL);
+
 }

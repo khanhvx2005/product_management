@@ -35,3 +35,39 @@ module.exports.permissionsPatch = async (req, res) => {
     const backURL = req.get("Referer") || "/admin/roles";
     res.redirect(backURL);
 }
+module.exports.detail = async (req, res) => {
+    const id = req.params.id;
+    const records = await Role.findOne({
+        _id: id,
+        deleted: false
+    })
+    res.render('admin/pages/role/detail', { title: "Trang chi tiết nhóm quyền", records: records })
+}
+module.exports.deleteItem = async (req, res) => {
+    const id = req.params.id;
+    await Role.updateOne({ _id: id }, {
+        deleted: true
+
+    })
+    req.flash('success', 'Xóa nhóm quyền thành công !');
+    const backURL = req.get("Referer") || "/admin/products";
+    res.redirect(backURL);
+
+}
+module.exports.edit = async (req, res) => {
+
+    const id = req.params.id;
+    const records = await Role.findOne({ _id: id, deleted: false })
+
+
+
+
+    res.render('admin/pages/role/edit', { title: "Trang chỉnh sửa nhóm quyền", records: records })
+}
+module.exports.editPatch = async (req, res) => {
+
+
+    await Role.updateOne({ _id: req.params.id }, req.body)
+    req.flash("success", "Chỉnh sửa thành công !");
+    res.redirect("/admin/roles")
+}

@@ -1,7 +1,8 @@
 extends ../../layouts/default.pug
+include ../../mixins/alert.pug
 block main 
     if(role.permissions.includes("roles_view"))
-
+        +alert_success(5000)
         h2 Nhóm quyền
         //- div #{records}
         div(class="card mb-3")
@@ -36,6 +37,11 @@ block main
 
                                             button(type="button" class="btn btn-danger ml-1 btn-sm" button-delete-item data-id = item.id) Xóa
                                         a( class="btn btn-primary ml-1 btn-sm" href = `/admin/roles/detail/${item.id}`) Chi tiết
+        
                         else 
                             tr 
                                 td Chưa có nhóm quyền nào được tạo
+        form(action = ""
+            method = "POST"
+            form-delete-item
+            path = "/admin/roles/delete")

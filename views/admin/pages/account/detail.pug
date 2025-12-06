@@ -1,0 +1,21 @@
+extends ../../layouts/default.pug
+block main 
+    h3 Trang chi tiết tài khoản 
+    if(records)
+        div(class="mb-3") Họ tên * : <b>#{records.fullname}</b>
+        div(class="mb-3") Email * : <b>#{records.email}</b>
+        div(class="mb-3") Điện thoại * : <b>#{records.phone}</b>
+        div(class = "mb-3") Hình ảnh :
+        
+        img(
+            src = records.avatar
+            alt = records.title
+            style = "width:150px;height:auto"
+        )
+        div(class = "mt-3")
+            span.label Trạng thái:
+            if(records.status === "active")
+                button(type = "button " class="btn btn-success btn-sm ") Hoạt động
+            else
+                button(type = "button " class="btn btn-danger btn-sm ") Dừng hoạt động 
+        div(class = "mt-3") Phân quyền *: <b>#{records.role.title}</b>

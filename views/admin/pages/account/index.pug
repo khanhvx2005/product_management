@@ -33,7 +33,11 @@ block main
                                     td 
                                         img(src = item.avatar alt = item.fullname)
                                     td #{item.fullname}
-                                    td #{item.role.title}
+                                    td
+                                        if(item.role)
+                                            p #{item.role.title}
+                                        else 
+                                            p #{item.role_id}
                                     td #{item.email}
                                     td
                                         if(role.permissions.includes("account_edit"))
@@ -54,3 +58,11 @@ block main
                             p Chưa có nhóm quyền nào được tạo
                             p Vui lòng tạo nhóm quyền
                                 a(href = `${prifixAmin}/roles/create` class = "btn btn-success" ) + Thêm mới nhóm quyền
+        form(action=""
+            method = "POST"
+            path ="/admin/account/change-status"
+            form-change-status )
+        form(action = ""
+            method = "POST"
+            form-delete-item
+            path = "/admin/account/delete")

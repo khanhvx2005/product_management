@@ -1,0 +1,14 @@
+extends ../../layouts/default.pug
+block main 
+    h3 Chỉnh Sửa Nhóm Quyền
+    form(action=`/admin/roles/edit/${records.id}?_method=PATCH` 
+            method="POST" 
+            
+            ) 
+            div(class="form-group")
+                label(for = "title") Tiêu đề
+                input(type = "text" class = "form-control" id = "title" name = "title" value = records.title)
+            div(class="form-group")
+                label(for = "description") Tiêu đề
+                textarea(type = "text" class = "form-control" id = "description" name = "description") #{records.description}
+            button(type = "submit" class = "btn btn-success") Cập nhập

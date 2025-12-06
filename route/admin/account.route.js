@@ -20,6 +20,9 @@ router.patch('/edit/:id',
     uploadCloud.upload,
     validate.editPatch,
     controller.editPatch)
+router.patch('/change-status/:id/:status', controller.changeStatus)
+router.get('/detail/:id', controller.detail)
+router.delete('/delete/:id', controller.deleteItem)
 
 
 module.exports = router;
