@@ -268,7 +268,8 @@ module.exports.editPatch = async (req, res) => {
         $push: { updatedBy: updatedBy }
     })
     req.flash("success", "Chỉnh sửa thành công !");
-    res.redirect("/admin/products")
+    const backURL = req.get("Referer");
+    res.redirect(backURL)
 }
 module.exports.detail = async (req, res) => {
     const id = req.params.id;
