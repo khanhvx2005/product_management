@@ -57,5 +57,14 @@ block main
                         div(class="form-check form-check-inline")
                             input(type = "radio" class = "form-check-input" id = "inactive" name = "status" value = "inactive" checked= (products.status === "inactive" ? true : false))
                             label(for = "inactive" class = "form-check-label" ) Dừng hoạt động
+                div(class="form-group")
+                    label Nổi bật
+                    div
+                        div(class=" form-check form-check-inline") 
+                            input(type = "radio" class = "form-check-input" id = "featured1" name = "featured" value = "1" checked= (products.featured === "1" ? true : false)) 
+                            label(for = "featured1" class = "form-check-label" ) Nổi bật
+                        div(class="form-check form-check-inline")
+                            input(type = "radio" class = "form-check-input" id = "featured0" name = "featured" value = "0" checked= (products.featured === "0" ? true : false))
+                            label(for = "featured0" class = "form-check-label" ) Không nổi bật
 
                 button(type = "submit" class = "btn btn-primary") Cập nhập
