@@ -109,16 +109,17 @@
 }
 
 .inner-discount {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 48px;
-    height: 48px;
-    border-radius: 50%;
-    background-color: yellow;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    padding: 0px 4px;
+    align-items: flex-start;
+    border-radius: 8px;
+    background: rgb(245, 245, 250);
+    color: rgb(39, 39, 42);
+    font-family: Inter;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 150%;
 }
 
 .inner-featured {
@@ -167,22 +168,32 @@
 
 .inner-item {
     display: flex;
-    justify-content: space-between;
-    gap: 10px;
+    -webkit-box-align: center;
+    align-items: center;
+    align-content: center;
+    gap: 4px;
+    align-self: stretch;
+    flex-wrap: wrap;
+    color: rgb(39, 39, 42);
+    font-family: Inter;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 125%;
 }
 
 .inner-price-new {
-    font-size: 20px;
-    font-weight: 700;
-    color: #ff4d4f;
-    /* Màu sắc nổi bật cho giá mới (ví dụ: đỏ) */
-    margin: 0;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 150%;
+    color: rgb(255, 66, 78);
 }
 
 .inner-price-old {
-    font-size: 20px;
-    color: #999999;
-    margin: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 21px;
+    color: rgb(128, 128, 137);
 }
 
 /* end section-one */
@@ -232,7 +243,7 @@
     background: #fff;
     border-radius: 8px;
     padding: 16px;
-    height: 100%;
+
     /* Giúp các cột cao bằng nhau nếu dùng flex */
 }
 
@@ -296,12 +307,13 @@
 }
 
 .inner-percent {
-    color: #ff424e;
-    background: #fff0f1;
-    border: 1px solid #ff424e;
-    padding: 0 4px;
-    border-radius: 2px;
+
+    font-weight: 400;
     font-size: 12px;
+    line-height: 150%;
+    padding: 0px 4px;
+    background: rgb(245, 245, 250);
+    border-radius: 8px;
 }
 
 /* Thuộc tính */

@@ -18,11 +18,12 @@ block main
                                 a(href=`/products/${products.category.slug}`) #{products.category.title}
                         .inner-price-wrap
                             if(products.priceNew)
-                                .inner-price-new #{products.priceNew.toLocaleString()}đ
-                            if(products.price)
-                                .inner-price-old #{products.price.toLocaleString()}đ
+                                .inner-price-new #{parseInt(products.priceNew).toLocaleString('vi-VN')} <sup>đ</sup>
                             if(products.discountPercentage)
                                 .inner-percent -#{products.discountPercentage}%
+                            if(products.price)
+                                .inner-price-old #{products.price.toLocaleString('vi-VN')}<sup>đ</sup>
+                            
                         .inner-attributes
                             if(products.stock)
                                 .attribute-item

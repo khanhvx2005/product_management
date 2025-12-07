@@ -3,12 +3,11 @@ mixin product-item(item)
         div(class="inner-box")
             div(class="inner-image")
                 img(src = item.thumbnail alt = item.title)
-                div(class="inner-discount") -#{item.discountPercentage}%
                 if(item.featured == "1")
                     div(class="inner-featured") Nổi bật
             div(class="inner-content")
                 h1(class= "inner-title")
                     a(href = `/products/detail/${item.slug}`) #{item.title}
                 div(class="inner-item")
-                    p(class="inner-price-new") #{item.priceNew}$
-                    p(class="inner-price-old") <del>#{item.price}$
+                    p(class="inner-price-new") #{parseInt(item.priceNew).toLocaleString('vi-VN')} <sup>đ</sup>
+                    div(class="inner-discount") -#{item.discountPercentage}%

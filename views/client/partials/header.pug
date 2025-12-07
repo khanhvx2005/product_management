@@ -5,7 +5,12 @@ header(class="header")
             div(class="col-3")
                 div(class="inner-logo")
                     img(src = "/client/images/cellphoneS_logo-1024x341.png" alt = "" width = "200px" height = "auto")
-            div(class="col-9")
+            div(class="col-5")
+                form(action = "/search" method = "GET")
+                    div(class="input-group ")
+                        input(class="form-control" type = "text" name = "keyword" value = keyword)
+                        button(type = "submit" class = "btn btn-primary btn-sm") Tìm kiếm
+            div(class="col-4")
                 div(class="inner-menu")
                     ul 
                         li 
