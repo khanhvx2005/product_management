@@ -1,5 +1,7 @@
 extends ../../layouts/default.pug
+include ../../mixins/alert.pug
 block main 
+    +alert_success("2000")
     div(class="product-detail-page")
         div(class="container-fluid my-5")
             div(class="row")
@@ -49,8 +51,8 @@ block main
                             
                             .button-group
                                 button(type="submit" class="btn btn-buy")
-                                    strong Chọn Mua
+                                    strong Giỏ hàng
                                     span Giao hàng tận nơi hoặc nhận tại cửa hàng
                             
-                                button(type="button" class="btn btn-success") Giỏ hàng
+                                //- button(type="button" class="btn btn-success") Giỏ hàng
                                     

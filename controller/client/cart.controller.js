@@ -1,0 +1,35 @@
+const Cart = require("../../model/cart.model")
+module.exports.addPost = async (req, res) => {
+    const productId = req.params.productId; // lấy ra id của sản phẩm
+    const quantity = parseInt(req.body.quantity);
+    const cartId = req.cookies.cartId;
+
+    const objProducts = {
+        product_id: productId,
+        quantity: quantity
+    }
+    const cart = await Cart.findOne({
+        _id: cartId
+    })
+    const exitsProduct = cart.products.find((item) => item.product_id == productId)
+    if (exitsProduct) {
+        const quantityNew = quantity + exitsProduct.quantity;
+        await Cart.updateOne({
+            _id: cartId,
+            "products.product_id": productId
+        }, {
+            $set: {
+                "products.$.quantity": quantityNew
+            }
+        })
+        const backURL = req.get("Referer");
+        req.flash("success", "Thêm sản phẩm vào giỏ hàng thành công")
+        res.redirect(backURL)
+    } else {
+        await Cart.updateOne({ _id: cartId }, { $push: { products: objProducts } })
+        const backURL = req.get("Referer");
+        req.flash("success", "Thêm sản phẩm vào giỏ hàng thành công")
+        res.redirect(backURL)
+    }
+
+}
