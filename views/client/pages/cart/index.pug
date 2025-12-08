@@ -38,7 +38,7 @@ block main
                                                 td.align-middle
                                                     .quantity-control.small
                                                         button.btn-minus(type="button") -
-                                                        input(type="number" value=item.quantity min="1")
+                                                        input(type="number" value=item.quantity min="1" name = "quantity")
                                                         button.btn-plus(type="button") +
                                                 td.align-middle
                                                     span.total-price #{item.totalPrice.toLocaleString('vi-VN')} <sup>đ</sup>

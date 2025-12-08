@@ -1,26 +1,36 @@
 //  tăng-giảm số lượng sp
-const buttonMinus = document.querySelector(".btn-minus");
-const buttonPlus = document.querySelector(".btn-plus");
-const inputQuantity = document.querySelector("input[name='quantity']");
-if (inputQuantity) {
+const buttonMinus = document.querySelectorAll(".btn-minus");
+const buttonPlus = document.querySelectorAll(".btn-plus");
+const inputQuantity = document.querySelectorAll("input[name='quantity']");
+console.log(inputQuantity);
+if (inputQuantity.length > 0) {
+    buttonMinus.forEach((button, index) => {
+        button.addEventListener("click", () => {
+            const input = inputQuantity[index];
+            const currentValue = parseInt(input.value)
+            const minValue = parseInt(input.getAttribute("min")) || 1;
 
-    buttonMinus.addEventListener("click", () => {
-        const currentValue = parseInt(inputQuantity.value);
-        const minValue = parseInt(inputQuantity.getAttribute("min")) || 1;
-        if (currentValue > minValue) {
-            inputQuantity.value = currentValue - 1;
+            if (currentValue > minValue) {
+                input.value = currentValue - 1;
 
-        }
+            }
+        })
     })
-    buttonPlus.addEventListener("click", () => {
-        const currentValue = parseInt(inputQuantity.value);
-        const maxValue = parseInt(inputQuantity.getAttribute("max")) || 100;
-        if (currentValue < maxValue) {
-            inputQuantity.value = currentValue + 1;
 
-        }
+    buttonPlus.forEach((button, index) => {
+        button.addEventListener("click", () => {
+            const input = inputQuantity[index];
 
+            const currentValue = parseInt(input.value)
+            const maxValue = parseInt(input.getAttribute("max")) || 100;
+            if (currentValue < maxValue) {
+                input.value = currentValue + 1;
+
+            }
+        })
     })
+
+
 }
 // end tăng-giảm số lượng sp
 // thoong bao
