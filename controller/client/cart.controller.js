@@ -1,4 +1,21 @@
 const Cart = require("../../model/cart.model")
+const Product = require("../../model/product.model")
+const productsHelpers = require("../../helpers/products")
+module.exports.index = async (req, res) => {
+    const cart = await Cart.findOne({
+        _id: req.cookies.cartId
+    })
+    for (const item of cart.products) {
+        const productInfo = await Product.findOne({
+            _id: item.product_id
+        })
+        productInfo.priceNew = productsHelpers.priceNewProduct(productInfo)
+        item.productInfo = productInfo;
+        item.totalPrice = productInfo.priceNew * item.quantity;
+    }
+    cart.totalPrice = cart.products.reduce((total, item) => total + item.totalPrice, 0)
+    res.render("client/pages/cart/index", { title: "Trang giỏ hàng", cartDetail: cart })
+}
 module.exports.addPost = async (req, res) => {
     const productId = req.params.productId; // lấy ra id của sản phẩm
     const quantity = parseInt(req.body.quantity);
