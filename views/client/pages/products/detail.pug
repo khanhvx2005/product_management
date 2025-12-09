@@ -45,13 +45,14 @@ block main
                             .quantity-box
                                 span.label Số lượng:
                                 div.quantity-control
-                                    button(type="button" class="btn-minus") -
+                                    button(type="button" class="btn-minus-detail") -
                                     input(type="number" name="quantity" value="1" min="1" max=products.stock)
-                                    button(type="button" class="btn-plus") +
+                                    button(type="button" class="btn-plus-detail") +
                             
                             .button-group
                                 button(type="submit" class="btn btn-buy")
                                     strong Giỏ hàng
                                     span Giao hàng tận nơi hoặc nhận tại cửa hàng
                             
-                                //- button(type="button" class="btn btn-success") Giỏ hàng                    
+                                //- button(type="button" class="btn btn-success") Giỏ hàng  
+    script(src = "/client/js/detail-product.js")                  
