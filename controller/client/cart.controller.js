@@ -62,3 +62,34 @@ module.exports.delete = async (req, res) => {
     const backURL = req.get("Referer")
     res.redirect(backURL)
 }
+
+module.exports.update = async (req, res) => {
+    try {
+        const productId = req.params.productId;
+        const quantity = parseInt(req.params.quantity);
+        const cartId = req.cookies.cartId; // Lấy mã giỏ hàng từ cookie
+
+        // 1. Tìm giỏ hàng và cập nhật số lượng cho sản phẩm đó
+        await Cart.updateOne(
+            {
+                _id: cartId,
+                "products.product_id": productId
+            },
+            {
+                $set: {
+                    "products.$.quantity": quantity // Dấu $ đại diện cho sản phẩm tìm thấy ở trên
+                }
+            }
+        );
+
+        // 2. Cập nhật xong thì quay lại trang giỏ hàng
+        req.flash("success", "Cập nhập số lượng thành công!")
+        const backURL = req.get("Referer")
+        res.redirect(backURL);
+
+    } catch (error) {
+        console.log(error);
+        const backURL = req.get("Referer")
+        res.redirect(backURL);
+    }
+};
