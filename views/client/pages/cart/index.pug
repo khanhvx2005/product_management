@@ -1,6 +1,8 @@
 extends ../../layouts/default.pug
+include ../../mixins/alert.pug
 
 block main
+    +alert_success("2000")
     .cart-page
         .container.my-5
             .row
@@ -43,7 +45,7 @@ block main
                                                 td.align-middle
                                                     span.total-price #{item.totalPrice.toLocaleString('vi-VN')} <sup>đ</sup>
                                                 td.text-center.align-middle
-                                                    button.btn.btn-sm.btn-outline-danger Xóa
+                                                    a(class="btn btn-sm btn-outline-danger" href = `/cart/delete/${item.product_id}`) Xóa
                                     else 
                                         h3 Không có sản phẩm nào trong giỏ hàng
 
