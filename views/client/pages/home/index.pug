@@ -2,8 +2,7 @@ extends ../../layouts/default.pug
 include ../../mixins/products-layout.pug
 
 block main 
-    include ../../partials/banner.pug
-    include ../../partials/flash-sales.pug
+    
     div(class = "section-one")
         div(class="container")
             div(class="row")
@@ -17,5 +16,4 @@ block main
                     div(class="inner-head")
                         h1(class="inner-title") Sản phẩm mới
             +products-grid(productsNew)
-    include ../../partials/brand-slider.pug
             
