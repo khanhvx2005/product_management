@@ -28,26 +28,29 @@ module.exports.addPost = async (req, res) => {
     const cart = await Cart.findOne({
         _id: cartId
     })
-    const exitsProduct = cart.products.find((item) => item.product_id == productId)
-    if (exitsProduct) {
-        const quantityNew = quantity + exitsProduct.quantity;
-        await Cart.updateOne({
-            _id: cartId,
-            "products.product_id": productId
-        }, {
-            $set: {
-                "products.$.quantity": quantityNew
-            }
-        })
-        const backURL = req.get("Referer");
-        req.flash("success", "Thêm sản phẩm vào giỏ hàng thành công")
-        res.redirect(backURL)
-    } else {
-        await Cart.updateOne({ _id: cartId }, { $push: { products: objProducts } })
-        const backURL = req.get("Referer");
-        req.flash("success", "Thêm sản phẩm vào giỏ hàng thành công")
-        res.redirect(backURL)
+    if (cart) {
+        const exitsProduct = cart.products.find((item) => item.product_id == productId)
+        if (exitsProduct) {
+            const quantityNew = quantity + exitsProduct.quantity;
+            await Cart.updateOne({
+                _id: cartId,
+                "products.product_id": productId
+            }, {
+                $set: {
+                    "products.$.quantity": quantityNew
+                }
+            })
+            const backURL = req.get("Referer");
+            req.flash("success", "Thêm sản phẩm vào giỏ hàng thành công")
+            res.redirect(backURL)
+        } else {
+            await Cart.updateOne({ _id: cartId }, { $push: { products: objProducts } })
+            const backURL = req.get("Referer");
+            req.flash("success", "Thêm sản phẩm vào giỏ hàng thành công")
+            res.redirect(backURL)
+        }
     }
+
 
 }
 module.exports.delete = async (req, res) => {
