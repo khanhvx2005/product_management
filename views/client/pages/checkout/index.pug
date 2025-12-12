@@ -7,7 +7,7 @@ block main
         .container.my-5
             .row
                 .col-12
-                    h3.mb-4.cart-header Trang Giỏ Hàng 
+                    h3.mb-4.cart-header Trang Đặt Hàng
 
             .row
                 //- --- CỘT TRÁI: DANH SÁCH SẢN PHẨM ---
@@ -23,7 +23,7 @@ block main
                                         th Giá
                                         th Số lượng
                                         th Tổng tiền
-                                        th.text-center Hành động
+                                        
                                 tbody
                                     if(cartDetail.products.length > 0)
                                         each item ,index in cartDetail.products
@@ -32,20 +32,14 @@ block main
                                                 td.align-middle
                                                     .product-img-wrap
                                                         img(src=item.productInfo.thumbnail alt=item.productInfo.title)
-                                                td.align-middle
-                                                    a.product-title(href=`/products/detail/${item.productInfo.slug}`) #{item.productInfo.title}
+                                                td.align-middle #{item.productInfo.title}
                                                 td.align-middle
                                                     .price-new #{item.productInfo.priceNew.toLocaleString('vi-VN')} <sup>đ</sup>
-                                                    .price-old #{item.productInfo.price.toLocaleString('vi-VN')} <sup>đ</sup>
-                                                td.align-middle
-                                                    .quantity-control.small
-                                                        button.btn-minus(type="button") -
-                                                        input(type="number" value=item.quantity min="1" name = "quantity" product-id = item.product_id)
-                                                        button.btn-plus(type="button") +
+                                                td(class="text-center") #{item.quantity}
+                                                        
                                                 td.align-middle
                                                     span.total-price #{item.totalPrice.toLocaleString('vi-VN')} <sup>đ</sup>
-                                                td.text-center.align-middle
-                                                    a(class="btn btn-sm btn-outline-danger" href = `/cart/delete/${item.product_id}`) Xóa
+                                                
                                     else 
                                         h3 Không có sản phẩm nào trong giỏ hàng
 
@@ -67,6 +61,19 @@ block main
                             .d-flex.justify-content-between.mb-4
                                 strong.text-dark Tổng cộng:
                                 strong.text-danger.fs-4 #{cartDetail.totalPrice.toLocaleString('vi-VN')} <sup>đ</sup>
+            .row
+                .col-12
+                    h3.mb-4.cart-header Thông tin cá nhân
+                    form(action = "/checkout/order" method = "POST")
+                        div(class="form-group")
+                            label(class="label" for = "fullname") Nhập họ tên :
+                            input(class="form-control" type = "text" name = "fullname" id = "fullname" required)
+                        div(class="form-group")
+                            label(class="label" for = "phone") Nhập số điện thoại :
+                            input(class="form-control" type = "text" name = "phone" id = "phone" required)
+                        div(class="form-group")
+                            label(class="label" for = "address") Nhập địa chỉ :
+                            input(class="form-control" type = "text" name = "address" id = "address" required)
+                        button(class="btn btn-success" type = "submit") Đặt hàng
                             
-                            .d-grid.gap-2
-                                a.btn.btn-buy.btn-lg(href = "/checkout") MUA HÀNG
+                            

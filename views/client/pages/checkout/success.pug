@@ -1,0 +1,10 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert.pug
+
+block main
+    +alert_success("2000")
+    .cart-page
+        .container.my-5
+            .row
+                .col-12
+                    h3.mb-4.cart-header Đặt hàng thành công
