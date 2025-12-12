@@ -50,7 +50,18 @@ module.exports.order = async (req, res) => {
     await Cart.updateOne({ _id: cartId }, { products: [] })
     res.redirect(`/checkout/success/${order.id}`);
 }
-module.exports.success = (req, res) => {
+module.exports.success = async (req, res) => {
+    const order = await Order.findOne({
+        _id: req.params.idOrder
+    })
+    for (const product of order.products) {
+        const productInfo = await Product.findOne({ _id: product.product_id }).select("title thumbnail")
+        product.productInfo = productInfo;
+        const priceNew = productsHelpers.priceNewProduct(product)
+        product.priceNew = priceNew;
+        product.totalPrice = product.priceNew * product.quantity;
+    }
+    order.totalPrice = order.products.reduce((total, item) => total + item.totalPrice, 0)
 
-    res.render("client/pages/checkout/success", { title: "Trang đặt hàng thành công" })
+    res.render("client/pages/checkout/success", { title: "Trang đặt hàng thành công", order: order })
 }

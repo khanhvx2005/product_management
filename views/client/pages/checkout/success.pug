@@ -8,3 +8,65 @@ block main
             .row
                 .col-12
                     h3.mb-4.cart-header Đặt hàng thành công
+            .row 
+                .col-12 
+                    div(class="alert alert-success") Chúc mưng bạn đã đặt hàng thành công
+            if(order)
+                .row 
+                    .col-12 
+                        h4(class="mb-2") Thông tin cá nhân
+                        table(class="table table-bordered")
+                            tbody 
+                                tr 
+                                    td Họ tên 
+                                    td <b> #{order.userInfo.fullname} </b>
+                                tr 
+                                    td Điện thoại 
+                                    td <b> #{order.userInfo.phone} </b>
+                                tr 
+                                    td Địa chỉ 
+                                    td <b> #{order.userInfo.address} </b>
+                .row 
+                    .col-9 
+                        h4(class="mb-2") Thông tin đơn hàng
+                        table(class="table table-bordered")
+                            thead
+                                tr
+                                    th.text-center(width="50px") STT
+                                    th(width="100px") Hình ảnh
+                                    th Tên sản phẩm
+                                    th Giá
+                                    th Số lượng
+                                    th Tổng tiền
+                                        
+                                tbody
+                                    if(order.products.length > 0)
+                                        each item ,index in order.products
+                                            tr
+                                                td.text-center.align-middle #{index + 1}
+                                                td.align-middle
+                                                    .product-img-wrap
+                                                        img(src=item.productInfo.thumbnail alt =item.productInfo.title )
+                                                td.align-middle #{item.productInfo.title}
+                                                td.align-middle
+                                                    .price-new #{item.priceNew.toLocaleString('vi-VN')} <sup>đ</sup>
+                                                td(class="text-center") #{item.quantity}
+                                                        
+                                                td.align-middle
+                                                    span.total-price #{item.totalPrice.toLocaleString('vi-VN')} <sup>đ</sup>
+                    .col-md-3
+                        .card.summary-card
+                            .card-body
+                                h5.card-title.mb-4 Tổng đơn hàng
+                        
+                                .d-flex.justify-content-between.mb-2
+                                    span.text-muted Tạm tính:
+                                    strong #{order.totalPrice.toLocaleString('vi-VN')} <sup>đ</sup>
+                                
+                                
+
+                                hr
+                                
+                                .d-flex.justify-content-between.mb-4
+                                    strong.text-dark Tổng cộng:
+                                    strong.text-danger.fs-4 #{order.totalPrice.toLocaleString('vi-VN')} <sup>đ</sup>
