@@ -76,33 +76,3 @@ if (showAlert) {
     })
 }
 // end thong bao
-// Hàm đếm ngược đơn giản
-function startTimer(duration, displayHours, displayMinutes, displaySeconds) {
-    var timer = duration, hours, minutes, seconds;
-    setInterval(function () {
-        hours = parseInt(timer / 3600, 10);
-        minutes = parseInt((timer % 3600) / 60, 10);
-        seconds = parseInt(timer % 60, 10);
-
-        hours = hours < 10 ? "0" + hours : hours;
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
-
-        displayHours.textContent = hours;
-        displayMinutes.textContent = minutes;
-        displaySeconds.textContent = seconds;
-
-        if (--timer < 0) {
-            timer = duration; // Reset lại khi hết giờ
-        }
-    }, 1000);
-}
-
-window.onload = function () {
-    // Đếm ngược 2 tiếng (2 * 60 * 60 = 7200 giây)
-    var twoHours = 60 * 60 * 2;
-    var displayHours = document.querySelector('#hours');
-    var displayMinutes = document.querySelector('#minutes');
-    var displaySeconds = document.querySelector('#seconds');
-    startTimer(twoHours, displayHours, displayMinutes, displaySeconds);
-};
