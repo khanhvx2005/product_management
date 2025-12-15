@@ -1,8 +1,10 @@
 extends ../../layouts/default.pug
 include ../../mixins/products-layout.pug
-
+include ../../mixins/alert.pug
 block main 
-    
+    +alert_success("5000")
+    +alert_error("5000")
+
     div(class = "section-one")
         div(class="container")
             div(class="row")
